@@ -14,35 +14,54 @@ datasource db {
 }
 
 model Driver {
-  id String @id @default(uuid())
-  year Int
-  // تاریخ بیمه
-  // تاریخ معاینه فنی
-  // شماره بیمه
-  // اسم ماشین
-  // کد ماشین
-  // پلاک
+  id              String @id @default(uuid())
+  firstName       String
+  lastName        String
+  nationalId      String
+  phoneNumber     String
+  bankAccount     String
+  degree          Int? // degree 
+  militaryService Int? // سربازی
+
+  primaryVehicle   Connetion? @relation("primaryVehicle")
+  secondaryVehicle Connetion? @relation("secondaryVehicle")
+  createdAt        DateTime   @default(now())
 }
+
 model Vehicle {
-  id String @id @default(uuid())
-  firstName String
-  lastName String
-  nationalId String
-  phoneNumber Int
-  bankAccount Int
-  // degree 
-  // سربازی
-  // 
-
+  id                 String     @id @default(uuid())
+  year               Int
+  insuranceDate      DateTime // تاریخ بیمه
+  technicalCheckDate DateTime // تاریخ معاینه فنی
+  insuranceNo        String // شماره بیمه
+  vehicleName        String // اسم ماشین
+  ChdNo              Int // کد ماشین
+  licensePlate       String // پلاک
+  Connetion          Connetion?
+  createdAt          DateTime   @default(now())
 }
-model Route{
-  id String @id @default(uuid())
-  // مسیر حرکت
-  // ایستگاه ها
-  // شرکت
-  // نوع شیفت
 
+model Route {
+  id        String     @id @default(uuid())
+  path      String // مسیر حرکت
+  stations  String // ایستگاه ها
+  company   String // شرکت
+  shift     Int // نوع شیفت
+  Connetion Connetion?
+  createdAt DateTime   @default(now())
 }
+
 model Connetion {
-  id String @id @default(uuid())
+  id              String  @id @default(uuid())
+  primaryDriver   Driver  @relation("primaryVehicle", fields: [primaryDriverId], references: [id])
+  secondaryDriver Driver  @relation("secondaryVehicle", fields: [secondaryDriverId], references: [id])
+  vehicle         Vehicle @relation(fields: [vehicleId], references: [id])
+  route           Route   @relation(fields: [routeId], references: [id])
+
+  primaryDriverId   String @unique
+  secondaryDriverId String @unique
+  vehicleId         String @unique
+  routeId           String @unique
+
+  createdAt DateTime @default(now())
 }
