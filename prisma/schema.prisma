@@ -23,13 +23,13 @@ model Driver {
   degree          Int? // degree 
   militaryService Int? // سربازی
 
-  primaryVehicle   Connetion? @relation("primaryVehicle")
-  secondaryVehicle Connetion? @relation("secondaryVehicle")
-  createdAt        DateTime   @default(now())
+  primaryVehicle   Connection? @relation("primaryVehicle")
+  secondaryVehicle Connection? @relation("secondaryVehicle")
+  createdAt        DateTime    @default(now())
 }
 
 model Vehicle {
-  id                 String     @id @default(uuid())
+  id                 String      @id @default(uuid())
   year               Int
   insuranceDate      DateTime // تاریخ بیمه
   technicalCheckDate DateTime // تاریخ معاینه فنی
@@ -37,21 +37,21 @@ model Vehicle {
   vehicleName        String // اسم ماشین
   ChdNo              Int // کد ماشین
   licensePlate       String // پلاک
-  Connetion          Connetion?
-  createdAt          DateTime   @default(now())
+  Connetion          Connection?
+  createdAt          DateTime    @default(now())
 }
 
 model Route {
-  id        String     @id @default(uuid())
+  id        String      @id @default(uuid())
   path      String // مسیر حرکت
   stations  String // ایستگاه ها
   company   String // شرکت
   shift     Int // نوع شیفت
-  Connetion Connetion?
-  createdAt DateTime   @default(now())
+  Connetion Connection?
+  createdAt DateTime    @default(now())
 }
 
-model Connetion {
+model Connection {
   id              String  @id @default(uuid())
   primaryDriver   Driver  @relation("primaryVehicle", fields: [primaryDriverId], references: [id])
   secondaryDriver Driver  @relation("secondaryVehicle", fields: [secondaryDriverId], references: [id])
