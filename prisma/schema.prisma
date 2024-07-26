@@ -47,7 +47,6 @@ model Route {
   path      String // مسیر حرکت
   stations  String // ایستگاه ها
   company   String // شرکت
-  shift     Int // نوع شیفت
   Connetion Connection?
   createdAt DateTime    @default(now())
 }
