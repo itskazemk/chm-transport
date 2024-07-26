@@ -31,11 +31,11 @@ model Driver {
 
 model Vehicle {
   id                 String      @id @default(uuid())
+  vehicleName        String // اسم ماشین
   year               Int
   insuranceDate      DateTime // تاریخ بیمه
-  technicalCheckDate DateTime // تاریخ معاینه فنی
   insuranceNo        String // شماره بیمه
-  vehicleName        String // اسم ماشین
+  technicalCheckDate DateTime // تاریخ معاینه فنی
   ChdNo              Int // کد ماشین
   licensePlate       String // پلاک
   Connetion          Connection?

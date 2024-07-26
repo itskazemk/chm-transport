@@ -1,3 +1,4 @@
+import VehicleForm from "@/components/VehicleForm";
 import { getAllVehicle } from "@/utils/actions/vehicleActions";
 
 async function VehiclePage() {
@@ -12,7 +13,7 @@ async function VehiclePage() {
       <h3>لیست رانندگان</h3>
       <div className="grid grid-cols-3 gap-2">
         <div className="col-span-1">
-          <DriverFrom />
+          <VehicleForm />
         </div>
         <div className="col-span-2 overflow-x-auto">
           <table className="table">
@@ -34,13 +35,13 @@ async function VehiclePage() {
               {vehicles.map((driver, index) => (
                 <tr key={driver.id}>
                   <th>{index + 1}</th>
-                  <td>{driver.firstName}</td>
-                  <td>{driver.lastName}</td>
-                  <td>{driver.nationalId}</td>
-                  <td>{driver.phoneNumber}</td>
-                  <td>{driver.bankAccount}</td>
-                  <td>{driver.militaryService}</td>
-                  <td>{driver.degree}</td>
+                  <td>{driver.vehicleName}</td>
+                  <td>{driver.year}</td>
+                  <td>{driver.insuranceDate.toISOString()}</td>
+                  <td>{driver.insuranceNo}</td>
+                  <td>{driver.technicalCheckDate.toISOString()}</td>
+                  <td>{driver.ChdNo}</td>
+                  <td>{driver.licensePlate}</td>
                 </tr>
               ))}
             </tbody>
