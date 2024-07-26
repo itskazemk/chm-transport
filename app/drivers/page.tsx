@@ -1,4 +1,4 @@
-import { getAllDriver } from "@/utils/actions";
+import { getAllDriver } from "@/utils/actions/driverActions";
 
 async function DriversPage() {
   const drivers = await getAllDriver();

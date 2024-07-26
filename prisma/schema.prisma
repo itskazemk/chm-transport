@@ -59,6 +59,8 @@ model Connection {
   vehicle         Vehicle @relation(fields: [vehicleId], references: [id])
   route           Route   @relation(fields: [routeId], references: [id])
 
+  //TODO: نوع شیفت
+
   primaryDriverId   String @unique
   secondaryDriverId String @unique
   vehicleId         String @unique
