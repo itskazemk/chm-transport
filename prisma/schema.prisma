@@ -22,6 +22,7 @@ model Driver {
   bankAccount     String
   degree          Int? // degree 
   militaryService Int? // سربازی
+  sex             Int?
 
   primaryVehicle   Connection? @relation("primaryVehicle")
   secondaryVehicle Connection? @relation("secondaryVehicle")
