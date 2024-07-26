@@ -3,7 +3,6 @@ import { getAllRoutes } from "@/utils/actions/routeActions";
 
 async function RoutesPage() {
   const routes = await getAllRoutes();
-  console.log(11, routes);
 
   let content: any = "222";
 
