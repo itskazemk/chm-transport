@@ -6,9 +6,9 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
 const schema = z.object({
-  path: z.string({ invalid_type_error: "Invalid path" }),
-  stations: z.string({ invalid_type_error: "Invalid stations" }),
-  company: z.string({ invalid_type_error: "Invalid company" }),
+  path: z.string({ invalid_type_error: "Invalid path" }).min(1),
+  stations: z.string({ invalid_type_error: "Invalid stations" }).min(1),
+  company: z.string({ invalid_type_error: "Invalid company" }).min(1),
 });
 
 export async function getAllRoutes() {
