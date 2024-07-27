@@ -5,8 +5,8 @@ import Link from "next/link";
 //TODO: add farhandFont
 
 export const metadata: Metadata = {
-  title: "ایاب و ذهاب چادرملو",
-  description: "برنامه مدیریت ایاب و ذهاب خودرو ها و رانندگان مجتمع صنعتی چادرملو",
+  title: "ایاب و ذهاب",
+  description: "برنامه مدیریت ایاب و ذهاب خودرو ها و رانندگان مجتمع صنعتی",
 };
 
 const navLinks = [

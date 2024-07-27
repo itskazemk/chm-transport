@@ -4,34 +4,39 @@ import db from "../db";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-
-const schema = z.object({
-  firstName: z.string().min(1),
-  lastName: z.string().min(1),
-  nationalId: z.string().min(1),
-  phoneNumber: z.string().min(1),
-  bankAccount: z.string().min(1),
-  degree: z.number().min(1),
-  militaryService: z.number().min(1),
-});
+import { driverSchema } from "../zodSchemas";
 
 export async function getAllDriver() {
   return await db.driver.findMany({ orderBy: { createdAt: "desc" } });
 }
 
-export async function createDriver(prevState: any, formData: FormData) {
+export async function createDriver(prevState: any, data: FormData) {
+  // const formData = Object.fromEntries(data)
+  // const parsed = driverSchema.safeParse(formData)
+  // if(!parsed.success){
+  //   return {message:"Invalid form data."}
+  // }
+
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  const firstName = formData.get("firstName");
-  const lastName = formData.get("lastName");
-  const nationalId = formData.get("nationalId");
-  const phoneNumber = formData.get("phoneNumber");
-  const bankAccount = formData.get("bankAccount");
-  const degree = Number(formData.get("degree"));
-  const militaryService = Number(formData.get("militaryService"));
+  const firstName = data.get("firstName");
+  const lastName = data.get("lastName");
+  const nationalId = data.get("nationalId");
+  const phoneNumber = data.get("phoneNumber");
+  const bankAccount = data.get("bankAccount");
+  const degree = Number(data.get("degree"));
+  const militaryService = Number(data.get("militaryService"));
 
   try {
-    const result = schema.parse({ firstName, lastName, nationalId, phoneNumber, bankAccount, degree, militaryService });
+    const result = driverSchema.parse({
+      firstName,
+      lastName,
+      nationalId,
+      phoneNumber,
+      bankAccount,
+      degree,
+      militaryService,
+    });
     console.error("Validation errors:", result);
     await db.driver.create({ data: result });
     return { message: "success" };
