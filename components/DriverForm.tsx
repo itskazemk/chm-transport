@@ -40,7 +40,11 @@ function DriverFrom() {
   }, [state]);
 
   function formSubmitFn(data: z.output<typeof driverSchema>) {
-    // TODO: data is an obj, cast it into FormData and then send it to formAction
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => {
+      formData.append(key, (data as any)[key as keyof typeof data]);
+    });
+    formAction(formData);
   }
 
   return (
@@ -100,8 +104,8 @@ function DriverFrom() {
         </label>
       </div>
 
-      {/* <SubmitBtn /> */}
-      <button type="submit">submit</button>
+      <SubmitBtn />
+      {/* <button type="submit">submit</button> */}
     </form>
   );
 }
