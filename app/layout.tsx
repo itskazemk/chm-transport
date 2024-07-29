@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Link from "next/link";
+import { Bus, Cable, icons, TrafficCone, UserRound } from "lucide-react";
 
 //TODO: add farhandFont
 
@@ -10,10 +11,10 @@ export const metadata: Metadata = {
 };
 
 const navLinks = [
-  { label: "خودروها", href: "/vehicles" },
-  { label: "رانندگان", href: "drivers" },
-  { label: "مسیرها", href: "routes" },
-  { label: "؟؟؟ارتباط", href: "something" },
+  { label: "خودروها", href: "/vehicles", icon: <Bus /> },
+  { label: "رانندگان", href: "drivers", icon: <UserRound /> },
+  { label: "مسیرها", href: "routes", icon: <TrafficCone /> },
+  { label: "؟؟؟ارتباط", href: "something", icon: <Cable /> },
 ];
 
 export default function RootLayout({
@@ -54,13 +55,15 @@ export default function RootLayout({
                   {/* Navbar menu content here */}
                   {navLinks.map((link) => (
                     <li key={link.label}>
-                      <Link href={link.href}>{link.label}</Link>
+                      <Link href={link.href}>
+                        {link.label} {link.icon}
+                      </Link>
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
-            {children}
+            <div className="p-4">{children}</div>
           </div>
           <div className="drawer-side">
             <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>

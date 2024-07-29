@@ -93,14 +93,29 @@ function DriverFrom() {
           <div className="label">
             <span className="label-text">خدمت سربازی</span>
           </div>
-          <input type="text" {...form.register("militaryService")} className="input input-bordered w-full max-w-xs" />
+          <select {...form.register("militaryService")} className="select select-bordered w-full max-w-xs">
+            <option disabled selected>
+              مدرک تحصیلی
+            </option>
+            <option value="MOAF">رفته</option>
+            <option value="RAFTE">نرفته</option>
+            <option value="NARFTE">معاف</option>
+          </select>
         </label>
 
         <label className="form-control w-full max-w-xs">
           <div className="label">
             <span className="label-text">مدرک تحصیلی</span>
           </div>
-          <input type="text" {...form.register("degree")} className="input input-bordered w-full max-w-xs" />
+          <select {...form.register("degree")} className="select select-bordered w-full max-w-xs">
+            <option disabled selected>
+              مدرک تحصیلی
+            </option>
+            <option value="DIPLOM">دیپلم</option>
+            <option value="KARDANI">کاردانی</option>
+            <option value="KARSHENASI">کارشناسی</option>
+            <option value="KARSHENASIARSHAD">کارشناسی ارشد</option>
+          </select>
         </label>
       </div>
 

@@ -6,6 +6,6 @@ export const driverSchema = z.object({
   nationalId: z.string().trim().min(1),
   phoneNumber: z.string().trim().min(1),
   bankAccount: z.string().trim().min(1),
-  degree: z.string().trim().min(1),
-  militaryService: z.string().trim().min(1),
+  degree: z.enum(["DIPLOM", "KARDANI", "KARSHENASI", "KARSHENASIARSHAD"]),
+  militaryService: z.enum(["MOAF", "RAFTE", "NARFTE"]),
 });
