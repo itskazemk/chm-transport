@@ -47,7 +47,7 @@ export default function RootLayout({
                 </label>
               </div>
               <div className="mx-2 flex-1 px-2">
-                <Link href="/">ایاب و ذهاب چادرملو</Link>
+                <Link href="/">ایاب و ذهاب</Link>
               </div>
               <div className="hidden flex-none lg:block">
                 <ul className="menu menu-horizontal">
