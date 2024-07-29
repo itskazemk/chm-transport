@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "ایاب و ذهاب",
-  description: "برنامه مدیریت ایاب و ذهاب خودرو ها و رانندگان مجتمع صنعتی",
+  description: "برنامه مدیریت ایاب و ذهاب خودرو ها و رانندگان",
 };
 
 const navLinks = [
