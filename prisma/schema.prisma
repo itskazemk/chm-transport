@@ -14,15 +14,15 @@ datasource db {
 }
 
 model Driver {
-  id              String           @id @default(uuid())
+  id              String @id @default(uuid())
   firstName       String
   lastName        String
   nationalId      String
   phoneNumber     String
   bankAccount     String
-  degree          Degree? // degree 
-  militaryService MilitaryService? // سربازی
-  sex             Sex?
+  degree          Int? // degree 
+  militaryService Int? // سربازی
+  sex             Int?
 
   primaryVehicle   Connection? @relation("primaryVehicle")
   secondaryVehicle Connection? @relation("secondaryVehicle")
@@ -46,7 +46,7 @@ model Route {
   id        String      @id @default(uuid())
   path      String // مسیر حرکت
   stations  String // ایستگاه ها
-  company   Company // شرکت
+  company   Int? // شرکت
   Connetion Connection?
   createdAt DateTime    @default(now())
 }
@@ -68,26 +68,26 @@ model Connection {
   createdAt DateTime @default(now())
 }
 
-enum Degree {
-  DIPLOM
-  KARDANI
-  KARSHENASI
-  KARSHENASIARSHAD
-}
+// enum Degree {
+//   DIPLOM
+//   KARDANI
+//   KARSHENASI
+//   KARSHENASIARSHAD
+// }
 
-enum MilitaryService {
-  MOAF
-  RAFTE
-  NARFTE
-}
+// enum MilitaryService {
+//   MOAF
+//   RAFTE
+//   NARFTE
+// }
 
-enum Sex {
-  MALE
-  FEMALE
-}
+// enum Sex {
+//   MALE
+//   FEMALE
+// }
 
-enum Company {
-  PAMIDCO
-  ARFA
-  CHD
-}
+// enum Company {
+//   PAMIDCO
+//   ARFA
+//   CHD
+// }

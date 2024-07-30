@@ -45,6 +45,7 @@ function DriverFrom() {
     Object.keys(data).forEach((key) => {
       formData.append(key, (data as any)[key as keyof typeof data]);
     });
+    console.log("clientZod", data);
     formAction(formData);
   }
 
@@ -103,9 +104,9 @@ function DriverFrom() {
               <option disabled selected>
                 مدرک تحصیلی
               </option>
-              <option value="MOAF">رفته</option>
-              <option value="RAFTE">نرفته</option>
-              <option value="NARFTE">معاف</option>
+              <option value="0">رفته</option>
+              <option value="1">نرفته</option>
+              <option value="2">معاف</option>
             </select>
           </label>
 
@@ -117,10 +118,11 @@ function DriverFrom() {
               <option disabled selected>
                 مدرک تحصیلی
               </option>
-              <option value="DIPLOM">دیپلم</option>
-              <option value="KARDANI">کاردانی</option>
-              <option value="KARSHENASI">کارشناسی</option>
-              <option value="KARSHENASIARSHAD">کارشناسی ارشد</option>
+              <option value="0">زیر دیپلم</option>
+              <option value="1">دیپلم</option>
+              <option value="2">کاردانی</option>
+              <option value="3">کارشناسی</option>
+              <option value="4">کارشناسی ارشد</option>
             </select>
           </label>
         </div>

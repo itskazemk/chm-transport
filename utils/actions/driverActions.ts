@@ -16,16 +16,9 @@ export async function createDriver(prevState: any, data: FormData) {
   // if(!parsed.success){
   //   return {message:"Invalid form data."}
   // }
+  console.log("serverzod", parsed);
 
   await new Promise((resolve) => setTimeout(resolve, 1000));
-
-  // const firstName = data.get("firstName");
-  // const lastName = data.get("lastName");
-  // const nationalId = data.get("nationalId");
-  // const phoneNumber = data.get("phoneNumber");
-  // const bankAccount = data.get("bankAccount");
-  // const degree = Number(data.get("degree"));
-  // const militaryService = Number(data.get("militaryService"));
 
   try {
     const result = driverSchema.parse(formData);
