@@ -9,7 +9,7 @@ async function DriversPage() {
     content = <div>راننده ای ثبت نشده است</div>;
   } else {
     content = (
-      <div className="col-span-2 overflow-x-auto">
+      <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
           <thead>
@@ -46,12 +46,15 @@ async function DriversPage() {
 
   return (
     <div>
-      <h3>لیست رانندگان</h3>
       <div className="grid grid-cols-3 gap-2">
         <div className="col-span-1">
-          <DriverFrom />
+          <div className="w-full rounded-lg border border-gray-200 bg-white p-4 shadow-md sm:p-8">
+            <DriverFrom />
+          </div>
         </div>
-        {content}
+        <div className="col-span-2 w-full rounded-lg border border-gray-200 bg-white p-4 shadow-md sm:p-8">
+          {content}
+        </div>
       </div>
     </div>
   );

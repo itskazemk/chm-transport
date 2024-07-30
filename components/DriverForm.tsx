@@ -7,6 +7,7 @@ import { driverSchema } from "@/utils/zodSchemas";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { SquarePlus } from "lucide-react";
 
 interface FormState {
   message: string;
@@ -15,8 +16,8 @@ interface FormState {
 const SubmitBtn = () => {
   const { pending } = useFormStatus();
   return (
-    <button type="submit" className="btn btn-primary join-item" disabled={pending}>
-      {pending ? "please wait..." : "create task"}
+    <button type="submit" className="btn btn-primary w-full" disabled={pending}>
+      {pending ? "..." : "ایجاد"}
     </button>
   );
 };
@@ -49,79 +50,87 @@ function DriverFrom() {
 
   return (
     // <form action={formAction}>
-    <form onSubmit={form.handleSubmit(formSubmitFn)}>
-      <div className="grid grid-cols-2 gap-2">
-        <label className="form-control w-full max-w-xs">
-          <div className="label">
-            <span className="label-text">نام</span>
-          </div>
-          <input type="text" {...form.register("firstName")} className="input input-bordered w-full max-w-xs" />
-        </label>
-
-        <label className="form-control w-full max-w-xs">
-          <div className="label">
-            <span className="label-text">نام خانوادگی</span>
-          </div>
-          <input type="text" {...form.register("lastName")} className="input input-bordered w-full max-w-xs" />
-        </label>
+    <>
+      <div className="mb-2 flex w-1/3 gap-2 rounded bg-base-200 p-3">
+        <SquarePlus />
+        ثبت راننده جدید
       </div>
-      <div className="grid grid-cols-2 gap-2">
-        <label className="form-control w-full max-w-xs">
-          <div className="label">
-            <span className="label-text">کدملی</span>
-          </div>
-          <input type="text" {...form.register("nationalId")} className="input input-bordered w-full max-w-xs" />
-        </label>
+      <form onSubmit={form.handleSubmit(formSubmitFn)}>
+        <div className="grid grid-cols-2 gap-2">
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">نام</span>
+            </div>
+            <input type="text" {...form.register("firstName")} className="input input-bordered w-full max-w-xs" />
+          </label>
 
-        <label className="form-control w-full max-w-xs">
-          <div className="label">
-            <span className="label-text">شماره موبایل</span>
-          </div>
-          <input type="text" {...form.register("phoneNumber")} className="input input-bordered w-full max-w-xs" />
-        </label>
-      </div>
-
-      <label className="form-control w-full max-w-xs">
-        <div className="label">
-          <span className="label-text">شماره حساب</span>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">نام خانوادگی</span>
+            </div>
+            <input type="text" {...form.register("lastName")} className="input input-bordered w-full max-w-xs" />
+          </label>
         </div>
-        <input type="text" {...form.register("bankAccount")} className="input input-bordered w-full max-w-xs" />
-      </label>
+        <div className="grid grid-cols-2 gap-2">
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">کدملی</span>
+            </div>
+            <input type="text" {...form.register("nationalId")} className="input input-bordered w-full max-w-xs" />
+          </label>
 
-      <div className="grid grid-cols-2 gap-2">
-        <label className="form-control w-full max-w-xs">
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">شماره موبایل</span>
+            </div>
+            <input type="text" {...form.register("phoneNumber")} className="input input-bordered w-full max-w-xs" />
+          </label>
+        </div>
+
+        <label className="form-control w-full">
           <div className="label">
-            <span className="label-text">خدمت سربازی</span>
+            <span className="label-text">شماره حساب</span>
           </div>
-          <select {...form.register("militaryService")} className="select select-bordered w-full max-w-xs">
-            <option disabled selected>
-              مدرک تحصیلی
-            </option>
-            <option value="MOAF">رفته</option>
-            <option value="RAFTE">نرفته</option>
-            <option value="NARFTE">معاف</option>
-          </select>
+          <input type="text" {...form.register("bankAccount")} className="input input-bordered w-full" />
         </label>
 
-        <label className="form-control w-full max-w-xs">
-          <div className="label">
-            <span className="label-text">مدرک تحصیلی</span>
-          </div>
-          <select {...form.register("degree")} className="select select-bordered w-full max-w-xs">
-            <option disabled selected>
-              مدرک تحصیلی
-            </option>
-            <option value="DIPLOM">دیپلم</option>
-            <option value="KARDANI">کاردانی</option>
-            <option value="KARSHENASI">کارشناسی</option>
-            <option value="KARSHENASIARSHAD">کارشناسی ارشد</option>
-          </select>
-        </label>
-      </div>
+        <div className="grid grid-cols-2 gap-2">
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">خدمت سربازی</span>
+            </div>
+            <select {...form.register("militaryService")} className="select select-bordered w-full max-w-xs">
+              <option disabled selected>
+                مدرک تحصیلی
+              </option>
+              <option value="MOAF">رفته</option>
+              <option value="RAFTE">نرفته</option>
+              <option value="NARFTE">معاف</option>
+            </select>
+          </label>
 
-      <SubmitBtn />
-      {/* <button type="submit">submit</button> */}
-    </form>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">مدرک تحصیلی</span>
+            </div>
+            <select {...form.register("degree")} className="select select-bordered w-full max-w-xs">
+              <option disabled selected>
+                مدرک تحصیلی
+              </option>
+              <option value="DIPLOM">دیپلم</option>
+              <option value="KARDANI">کاردانی</option>
+              <option value="KARSHENASI">کارشناسی</option>
+              <option value="KARSHENASIARSHAD">کارشناسی ارشد</option>
+            </select>
+          </label>
+        </div>
+
+        <div className="mt-5">
+          <SubmitBtn />
+        </div>
+        {/* <button type="submit">submit</button> */}
+      </form>
+    </>
   );
 }
 
