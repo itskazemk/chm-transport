@@ -52,7 +52,7 @@ function DriverFrom() {
     // <form action={formAction}>
     <>
       <div className="mb-2 flex w-1/3 gap-2 rounded bg-base-200 p-3">
-        <SquarePlus />
+        <SquarePlus className="text-primary" />
         ثبت راننده جدید
       </div>
       <form onSubmit={form.handleSubmit(formSubmitFn)}>
