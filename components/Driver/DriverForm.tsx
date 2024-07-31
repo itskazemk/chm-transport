@@ -1,13 +1,21 @@
 "use client";
 
-import { createDriver } from "@/utils/actions/driverActions";
-import { useEffect } from "react";
+import { createDriver, updateDriver } from "@/utils/actions/driverActions";
+import { useEffect, useRef } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { driverSchema } from "@/utils/zodSchemas";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SquarePlus } from "lucide-react";
+import toast, { Toaster } from "react-hot-toast";
+import { Driver } from "@prisma/client";
+
+interface DriverFormProps {
+  driver?: Driver | null;
+  // onSave: (driver: DriverWithEnum) => void;
+  // onSave: Function;
+}
 
 interface FormState {
   message: string;
@@ -26,17 +34,23 @@ const initialState: FormState = {
   message: "",
 };
 
-function DriverFrom() {
-  const form = useForm<z.output<typeof driverSchema>>({ resolver: zodResolver(driverSchema) });
+function DriverFrom({ driver }: DriverFormProps) {
+  const form = useForm<z.output<typeof driverSchema>>({
+    resolver: zodResolver(driverSchema),
+  });
 
-  const [state, formAction] = useFormState(createDriver, initialState);
+  const [state, formAction] = useFormState(
+    // driver?.id ? updateDriver.bind(null, driver.id) : createDriver,
+    driver ? updateDriver.bind(null, driver.id) : createDriver,
+    initialState
+  );
+
   useEffect(() => {
-    if (state.message === "error") {
-      alert("there was an error");
-      return;
+    if (state.message == "error") {
+      toast.error("خطا");
     }
-    if (state.message) {
-      alert("task created");
+    if (state.message == "success") {
+      toast.success("با موفقیت ثبت شد!");
     }
   }, [state]);
 
@@ -49,14 +63,32 @@ function DriverFrom() {
     formAction(formData);
   }
 
+  useEffect(() => {
+    if (driver) {
+      form.reset(driver); // Reset the form with the new driver data when the driver prop changes
+    }
+  }, [driver, form]);
+
+  const formRef = useRef<HTMLFormElement>(null);
+
   return (
     // <form action={formAction}>
     <>
+      <div>
+        <Toaster />
+      </div>
+      {/* <p>{form.formState?.errors?.militaryService}</p> */}
+      {state?.message && <div>{state.message}/</div>}
       <div className="mb-2 flex w-1/3 gap-2 rounded bg-base-200 p-3">
         <SquarePlus className="text-primary" />
         ثبت راننده جدید
       </div>
-      <form onSubmit={form.handleSubmit(formSubmitFn)}>
+      <form
+        // ref={formRef}
+        // action={formAction}
+        // onSubmit={form.handleSubmit(() => formRef.current?.submit())}
+        onSubmit={form.handleSubmit(formSubmitFn)}
+      >
         <div className="grid grid-cols-2 gap-2">
           <label className="form-control w-full max-w-xs">
             <div className="label">
@@ -100,13 +132,15 @@ function DriverFrom() {
             <div className="label">
               <span className="label-text">خدمت سربازی</span>
             </div>
-            <select {...form.register("militaryService")} className="select select-bordered w-full max-w-xs">
-              <option disabled selected>
-                مدرک تحصیلی
-              </option>
-              <option value="0">رفته</option>
-              <option value="1">نرفته</option>
-              <option value="2">معاف</option>
+            <select
+              {...form.register("militaryService", { valueAsNumber: true })} // تبدیل ورودی که بصورت استریگ است به عدد
+              className="select select-bordered w-full max-w-xs"
+              defaultValue={3}
+            >
+              <option value="0"></option>
+              <option value="1">معافیت</option>
+              <option value="2">دارای کارت پایان خدمت</option>
+              <option value="3">بدون کارت پایان خدمت</option>
             </select>
           </label>
 
@@ -114,15 +148,30 @@ function DriverFrom() {
             <div className="label">
               <span className="label-text">مدرک تحصیلی</span>
             </div>
-            <select {...form.register("degree")} className="select select-bordered w-full max-w-xs">
-              <option disabled selected>
-                مدرک تحصیلی
-              </option>
-              <option value="0">زیر دیپلم</option>
-              <option value="1">دیپلم</option>
-              <option value="2">کاردانی</option>
-              <option value="3">کارشناسی</option>
-              <option value="4">کارشناسی ارشد</option>
+            <select
+              {...form.register("degree", { valueAsNumber: true })}
+              className="select select-bordered w-full max-w-xs"
+              defaultValue={1}
+            >
+              <option value="0"></option>
+              <option value="1">زیر دیپلم</option>
+              <option value="2">دیپلم</option>
+              <option value="3">لیسانس</option>
+              <option value="4">فوق لیسانس</option>
+            </select>
+          </label>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">جنسیت</span>
+            </div>
+            <select
+              {...form.register("sex", { valueAsNumber: true })}
+              className="select select-bordered w-full max-w-xs"
+              defaultValue={0}
+            >
+              <option value="0"></option>
+              <option value="1">مرد</option>
+              <option value="2">زن</option>
             </select>
           </label>
         </div>

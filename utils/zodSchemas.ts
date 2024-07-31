@@ -28,6 +28,9 @@ export const driverSchema = z.object({
   nationalId: z.string().trim().min(1),
   phoneNumber: z.string().trim().min(1),
   bankAccount: z.string().trim().min(1),
-  degree: z.string().optional(),
-  militaryService: z.string().optional(),
+
+  // تبدیل استریگ عدد به خود تایپ عدد
+  degree: z.coerce.number(),
+  militaryService: z.coerce.number(),
+  sex: z.coerce.number(),
 });

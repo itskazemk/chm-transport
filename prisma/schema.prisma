@@ -20,9 +20,9 @@ model Driver {
   nationalId      String
   phoneNumber     String
   bankAccount     String
-  degree          Int? // degree 
-  militaryService Int? // سربازی
-  sex             Int?
+  degree          Int // degree 
+  militaryService Int // سربازی
+  sex             Int
 
   primaryVehicle   Connection? @relation("primaryVehicle")
   secondaryVehicle Connection? @relation("secondaryVehicle")
@@ -46,13 +46,14 @@ model Route {
   id        String      @id @default(uuid())
   path      String // مسیر حرکت
   stations  String // ایستگاه ها
-  company   Int? // شرکت
   Connetion Connection?
   createdAt DateTime    @default(now())
 }
 
 model Connection {
   id              String  @id @default(uuid())
+  company         Int? // شرکت
+  shitType        Int?
   primaryDriver   Driver  @relation("primaryVehicle", fields: [primaryDriverId], references: [id])
   secondaryDriver Driver  @relation("secondaryVehicle", fields: [secondaryDriverId], references: [id])
   vehicle         Vehicle @relation(fields: [vehicleId], references: [id])
