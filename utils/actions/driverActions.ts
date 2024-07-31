@@ -45,11 +45,9 @@ export async function createDriver(prevState: any, data: FormData) {
   try {
     await db.driver.create({ data: parsed.data });
     revalidatePath("/drivers");
-    revalidatePath("/", "layout");
     return { message: "success" };
   } catch (error: any) {
     revalidatePath("/drivers");
-    revalidatePath("/", "layout");
     console.log("Validation errors:", error);
     return { message: "error" };
   }
@@ -66,8 +64,19 @@ export async function deleteDriver(prevState: any, driverId: string) {
 }
 
 export async function updateDriver(driverId: string, prevState: any, data: FormData) {
-  console.log(111, driverId);
-  console.log(222, prevState);
-  console.log(333, data);
-  return { message: "success" };
+  const formData = Object.fromEntries(data);
+  const parsed = driverSchema.safeParse(formData);
+  if (!parsed.success) {
+    return { message: "Invalid form data." };
+  }
+
+  try {
+    await db.driver.update({ where: { id: driverId }, data: parsed.data });
+    revalidatePath("/drivers");
+    return { message: "success" };
+  } catch (error: any) {
+    revalidatePath("/drivers");
+    console.log("Validation errors:", error);
+    return { message: "error" };
+  }
 }

@@ -18,20 +18,18 @@ function ClientWrapper({ initialDrivers }: ClientWrapperProps) {
   };
 
   // Add a function to update the drivers list after editing
-  //   const updateDriverList = (updatedDriver: Driver) => {
-  //     setDrivers(drivers.map((driver) => (driver.id === updatedDriver.id ? updatedDriver : driver)));
-  //     setCurrentDriver(null);
-  //   };
+  const updateDriverList = (updatedDriver: Driver) => {
+    console.log(111, updatedDriver);
+    setDrivers(drivers.map((driver) => (driver.id === updatedDriver.id ? updatedDriver : driver)));
+    setCurrentDriver(null);
+  };
 
   return (
     <div>
       <div className="grid grid-cols-3 gap-2">
         <div className="col-span-1">
           <div className="w-full rounded-lg border border-gray-200 bg-white p-4 shadow-md sm:p-8">
-            <DriverForm
-              driver={currentDriver}
-              //  onSave={updateDriverList}
-            />
+            <DriverForm driver={currentDriver} onSave={updateDriverList} />
           </div>
         </div>
         <div className="col-span-2 w-full rounded-lg border border-gray-200 bg-white p-4 shadow-md sm:p-8">

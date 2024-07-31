@@ -14,7 +14,7 @@ import { Driver } from "@prisma/client";
 interface DriverFormProps {
   driver?: Driver | null;
   // onSave: (driver: DriverWithEnum) => void;
-  // onSave: Function;
+  onSave: Function;
 }
 
 interface FormState {
@@ -34,7 +34,7 @@ const initialState: FormState = {
   message: "",
 };
 
-function DriverFrom({ driver }: DriverFormProps) {
+function DriverFrom({ driver, onSave }: DriverFormProps) {
   const form = useForm<z.output<typeof driverSchema>>({
     resolver: zodResolver(driverSchema),
   });
@@ -61,6 +61,10 @@ function DriverFrom({ driver }: DriverFormProps) {
     });
     console.log("clientZod", data);
     formAction(formData);
+
+    if (driver) {
+      onSave(driver);
+    }
   }
 
   useEffect(() => {
