@@ -67,11 +67,14 @@ function VehicleForm({ vehicle, onSave }: VehicleFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleSubmit = async (data: z.output<typeof vehicleSchema>) => {
+    console.log(111, data);
+
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
       formData.append(key, (data as any)[key as keyof typeof data]);
     });
-    formAction(formData);
+
+    // formAction(formData);
   };
 
   return (
@@ -96,8 +99,10 @@ function VehicleForm({ vehicle, onSave }: VehicleFormProps) {
         // ------- only server side validation OKAY
         // action={formAction}
       >
+        <div>{form.formState?.errors?.root?.message}</div>
         <div className="grid grid-cols-2 gap-2">
           <label className="form-control w-full max-w-xs">
+            <div>{form.formState?.errors?.vehicleName?.message}</div>
             <div className="label">
               <span className="label-text">نوع</span>
             </div>
@@ -110,6 +115,7 @@ function VehicleForm({ vehicle, onSave }: VehicleFormProps) {
           </label>
 
           <label className="form-control w-full max-w-xs">
+            <div>{form.formState?.errors?.year?.message}</div>
             <div className="label">
               <span className="label-text">مدل</span>
             </div>
@@ -124,6 +130,7 @@ function VehicleForm({ vehicle, onSave }: VehicleFormProps) {
 
         <div className="grid grid-cols-2 gap-2">
           <label className="form-control w-full max-w-xs">
+            <div>{form.formState?.errors?.licensePlate?.message}</div>
             <div className="label">
               <span className="label-text">پلاک</span>
             </div>
@@ -136,6 +143,7 @@ function VehicleForm({ vehicle, onSave }: VehicleFormProps) {
           </label>
 
           <label className="form-control w-full max-w-xs">
+            <div>{form.formState?.errors?.insuranceNo?.message}</div>
             <div className="label">
               <span className="label-text">شماره بیمه</span>
             </div>
@@ -150,13 +158,19 @@ function VehicleForm({ vehicle, onSave }: VehicleFormProps) {
 
         <div className="grid grid-cols-2 gap-2">
           <div className="form-control w-full max-w-xs">
+            <div>{form.formState?.errors?.insuranceDate?.message}</div>
             <div className="label">
               <span className="label-text">تاریخ بیمه</span>
             </div>
-            <DatePickerInput control={form.control} name="insuranceDate" className="input input-bordered text-center" />
+            <DatePickerInput
+              control={form.control}
+              name="insuranceDate"
+              className="input input-bordered w-full text-center"
+            />
           </div>
 
           <label className="form-control w-full max-w-xs">
+            <div>{form.formState?.errors?.ChdNo?.message}</div>
             <div className="label">
               <span className="label-text">کد خودرو</span>
             </div>
@@ -171,6 +185,7 @@ function VehicleForm({ vehicle, onSave }: VehicleFormProps) {
 
         {/* <div className="grid grid-cols-2 gap-2"> */}
         <div className="form-control w-full">
+          <div>{form.formState?.errors?.technicalCheckDate?.message}</div>
           <div className="label">
             <span className="label-text">تاریخ معاینه فنی</span>
           </div>

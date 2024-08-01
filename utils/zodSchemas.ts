@@ -43,9 +43,9 @@ export const routeSchema = z.object({
 export const vehicleSchema = z.object({
   vehicleName: z.string().trim().min(1),
   year: z.coerce.number().min(1),
-  insuranceDate: z.date(),
+  insuranceDate: z.coerce.date().optional(), //date
   insuranceNo: z.string().trim().min(1),
-  technicalCheckDate: z.date(),
+  technicalCheckDate: z.coerce.date().optional(), //date
   ChdNo: z.coerce.number().min(1),
   licensePlate: z.string().trim().min(1),
 });
