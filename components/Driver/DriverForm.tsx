@@ -13,59 +13,47 @@ import { Driver } from "@prisma/client";
 
 interface DriverFormProps {
   driver?: Driver | null;
-  // onSave: (driver: DriverWithEnum) => void;
   onSave: Function;
 }
 
 interface FormState {
   message: string;
+  result: any;
 }
 
-const SubmitBtn = () => {
+const SubmitBtn = ({ editMode }: any) => {
   const { pending } = useFormStatus();
   return (
-    <button type="submit" className="btn btn-primary w-full" disabled={pending}>
-      {pending ? "..." : "ایجاد"}
+    <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} w-full`} disabled={pending}>
+      {pending ? "..." : editMode ? "ویرایش" : "ثبت راننده جدید"}
     </button>
   );
 };
 
 const initialState: FormState = {
   message: "",
+  result: null,
 };
 
-function DriverFrom({ driver, onSave }: DriverFormProps) {
+function DriverForm({ driver, onSave }: DriverFormProps) {
   const form = useForm<z.output<typeof driverSchema>>({
     resolver: zodResolver(driverSchema),
   });
 
-  const [state, formAction] = useFormState(
-    // driver?.id ? updateDriver.bind(null, driver.id) : createDriver,
-    driver ? updateDriver.bind(null, driver.id) : createDriver,
-    initialState
-  );
+  const [state, formAction] = useFormState(driver ? updateDriver.bind(null, driver.id) : createDriver, initialState);
 
   useEffect(() => {
-    if (state.message == "error") {
+    console.log(111, state.message);
+    if (state.message == "update success") {
+      console.log("edit effect", state.result);
+      onSave(state.result);
+      toast.success("با موفقیت ویرایش شد!");
+    } else if (state.message == "error") {
       toast.error("خطا");
-    }
-    if (state.message == "success") {
+    } else if (state.message == "create success") {
       toast.success("با موفقیت ثبت شد!");
     }
-  }, [state]);
-
-  function formSubmitFn(data: z.output<typeof driverSchema>) {
-    const formData = new FormData();
-    Object.keys(data).forEach((key) => {
-      formData.append(key, (data as any)[key as keyof typeof data]);
-    });
-    console.log("clientZod", data);
-    formAction(formData);
-
-    if (driver) {
-      onSave(driver);
-    }
-  }
+  }, [state]); // onSave cause infinite loop!
 
   useEffect(() => {
     if (driver) {
@@ -75,23 +63,35 @@ function DriverFrom({ driver, onSave }: DriverFormProps) {
 
   const formRef = useRef<HTMLFormElement>(null);
 
+  const handleSubmit = async (data: z.output<typeof driverSchema>) => {
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => {
+      formData.append(key, (data as any)[key as keyof typeof data]);
+    });
+    formAction(formData);
+  };
+
   return (
-    // <form action={formAction}>
     <>
       <div>
         <Toaster />
       </div>
-      {/* <p>{form.formState?.errors?.militaryService}</p> */}
-      {state?.message && <div>{state.message}/</div>}
+      {state?.message && <div>{state.message}</div>}
       <div className="mb-2 flex w-1/3 gap-2 rounded bg-base-200 p-3">
         <SquarePlus className="text-primary" />
         ثبت راننده جدید
       </div>
       <form
+        // ------- both side validation but causes page refresh
         // ref={formRef}
         // action={formAction}
         // onSubmit={form.handleSubmit(() => formRef.current?.submit())}
-        onSubmit={form.handleSubmit(formSubmitFn)}
+
+        // ------- both sides validation OKAY
+        onSubmit={form.handleSubmit(handleSubmit)}
+
+        // ------- only server side validation OKAY
+        // action={formAction}
       >
         <div className="grid grid-cols-2 gap-2">
           <label className="form-control w-full max-w-xs">
@@ -181,12 +181,11 @@ function DriverFrom({ driver, onSave }: DriverFormProps) {
         </div>
 
         <div className="mt-5">
-          <SubmitBtn />
+          <SubmitBtn editMode={!!driver} />
         </div>
-        {/* <button type="submit">submit</button> */}
       </form>
     </>
   );
 }
 
-export default DriverFrom;
+export default DriverForm;

@@ -38,25 +38,25 @@ export async function createDriver(prevState: any, data: FormData) {
   const formData = Object.fromEntries(data);
   const parsed = driverSchema.safeParse(formData);
   if (!parsed.success) {
-    return { message: "Invalid form data." };
+    return { message: "Invalid form data.", result: formData };
   }
   // console.log("posted data, ZOD's safeParseZ", parsed);
 
   try {
-    await db.driver.create({ data: parsed.data });
-    revalidatePath("/drivers");
-    return { message: "success" };
+    const result = await db.driver.create({ data: parsed.data });
+    revalidatePath("/drivers", "layout");
+    return { message: "create success", result };
   } catch (error: any) {
-    revalidatePath("/drivers");
+    revalidatePath("/drivers", "layout");
     console.log("Validation errors:", error);
-    return { message: "error" };
+    return { message: "error", result: error };
   }
 }
 
 export async function deleteDriver(prevState: any, driverId: string) {
   try {
     await db.driver.delete({ where: { id: driverId } });
-    revalidatePath("/drivers");
+    revalidatePath("/drivers", "layout");
     return { message: "success" };
   } catch (error: any) {
     return { message: "error" };
@@ -71,12 +71,12 @@ export async function updateDriver(driverId: string, prevState: any, data: FormD
   }
 
   try {
-    await db.driver.update({ where: { id: driverId }, data: parsed.data });
-    revalidatePath("/drivers");
-    return { message: "success" };
+    const result = await db.driver.update({ where: { id: driverId }, data: parsed.data });
+    revalidatePath("/drivers", "layout");
+    return { message: "update success", result };
   } catch (error: any) {
-    revalidatePath("/drivers");
-    console.log("Validation errors:", error);
-    return { message: "error" };
+    revalidatePath("/drivers", "layout");
+    // console.log("Validation errors:", error);
+    return { message: "error", result: error };
   }
 }

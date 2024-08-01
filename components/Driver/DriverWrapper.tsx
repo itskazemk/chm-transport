@@ -19,9 +19,11 @@ function ClientWrapper({ initialDrivers }: ClientWrapperProps) {
 
   // Add a function to update the drivers list after editing
   const updateDriverList = (updatedDriver: Driver) => {
-    console.log(111, updatedDriver);
-    setDrivers(drivers.map((driver) => (driver.id === updatedDriver.id ? updatedDriver : driver)));
-    setCurrentDriver(null);
+    if (updatedDriver) {
+      console.log(updatedDriver);
+      setDrivers(drivers.map((driver) => (driver.id === updatedDriver.id ? updatedDriver : driver)));
+      setCurrentDriver(null);
+    }
   };
 
   return (
