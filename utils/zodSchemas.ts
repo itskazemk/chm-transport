@@ -43,9 +43,29 @@ export const routeSchema = z.object({
 export const vehicleSchema = z.object({
   vehicleName: z.string().trim().min(1),
   year: z.coerce.number().min(1),
-  insuranceDate: z.coerce.date().optional(), //date
+  insuranceDate: z
+    // .coerce
+    .union([z.coerce.date(), z.string()])
+    .transform((val) => {
+      if (val === null) return val;
+      const date = new Date(val);
+      return isNaN(date.getTime()) ? null : date;
+    })
+    .nullable()
+    .optional()
+    .default(null), //date
   insuranceNo: z.string().trim().min(1),
-  technicalCheckDate: z.coerce.date().optional(), //date
+  technicalCheckDate: z
+    // .coerce
+    .union([z.coerce.date(), z.string()])
+    .transform((val) => {
+      if (val === null) return val;
+      const date = new Date(val);
+      return isNaN(date.getTime()) ? null : date;
+    })
+    .nullable()
+    .optional()
+    .default(null), //date
   ChdNo: z.coerce.number().min(1),
   licensePlate: z.string().trim().min(1),
 });
