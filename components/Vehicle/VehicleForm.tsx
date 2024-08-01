@@ -9,6 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { Vehicle } from "@prisma/client";
 import { vehicleSchema } from "@/utils/zodSchemas";
 import { createVehicle, updateVehicle } from "@/utils/actions/vehicleActions";
+import DatePickerInput from "../SimpleInputs";
 
 interface VehicleFormProps {
   vehicle?: Vehicle | null;
@@ -102,7 +103,7 @@ function VehicleForm({ vehicle, onSave }: VehicleFormProps) {
             </div>
             <input
               type="text"
-              {...form.register("insuranceDate")}
+              {...form.register("vehicleName")}
               // name="path"
               className="input input-bordered w-full max-w-xs"
             />
@@ -114,7 +115,7 @@ function VehicleForm({ vehicle, onSave }: VehicleFormProps) {
             </div>
             <input
               type="text"
-              {...form.register("insuranceNo")}
+              {...form.register("year")}
               // name="stations"
               className="input input-bordered w-full max-w-xs"
             />
@@ -128,7 +129,7 @@ function VehicleForm({ vehicle, onSave }: VehicleFormProps) {
             </div>
             <input
               type="text"
-              {...form.register("insuranceDate")}
+              {...form.register("licensePlate")}
               // name="path"
               className="input input-bordered w-full max-w-xs"
             />
@@ -148,17 +149,12 @@ function VehicleForm({ vehicle, onSave }: VehicleFormProps) {
         </div>
 
         <div className="grid grid-cols-2 gap-2">
-          <label className="form-control w-full max-w-xs">
+          <div className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">تاریخ بیمه</span>
             </div>
-            <input
-              type="text"
-              {...form.register("insuranceDate")}
-              // name="path"
-              className="input input-bordered w-full max-w-xs"
-            />
-          </label>
+            <DatePickerInput control={form.control} name="insuranceDate" className="input input-bordered text-center" />
+          </div>
 
           <label className="form-control w-full max-w-xs">
             <div className="label">
@@ -166,27 +162,25 @@ function VehicleForm({ vehicle, onSave }: VehicleFormProps) {
             </div>
             <input
               type="text"
-              {...form.register("insuranceNo")}
+              {...form.register("ChdNo")}
               // name="stations"
               className="input input-bordered w-full max-w-xs"
             />
           </label>
         </div>
 
-        <div className="grid grid-cols-2 gap-2">
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">تاریخ معاینه فنی</span>
-            </div>
-            <input
-              type="text"
-              {...form.register("insuranceDate")}
-              // name="path"
-              className="input input-bordered w-full max-w-xs"
-            />
-          </label>
+        {/* <div className="grid grid-cols-2 gap-2"> */}
+        <div className="form-control w-full">
+          <div className="label">
+            <span className="label-text">تاریخ معاینه فنی</span>
+          </div>
+          <DatePickerInput
+            control={form.control}
+            name="technicalCheckDate"
+            className="input input-bordered w-full text-center"
+          />
         </div>
-
+        {/* </div> */}
         <div className="mt-5">
           <SubmitBtn editMode={!!vehicle} />
         </div>
