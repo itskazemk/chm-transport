@@ -77,7 +77,7 @@ function RouteForm({ route, onSave }: RouteFormProps) {
         <Toaster />
       </div>
       {state?.message && <div>{state.message}</div>}
-      <div className="mb-2 flex w-1/3 gap-2 rounded bg-base-200 p-3">
+      <div className="mb-2 flex gap-2 rounded bg-base-200 p-3">
         <SquarePlus className="text-primary" />
         ثبت مسیر جدید
       </div>
