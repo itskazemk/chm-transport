@@ -43,9 +43,10 @@ model Vehicle {
 }
 
 model Route {
-  id        String      @id @default(uuid())
-  path      String // مسیر حرکت
-  stations  String // ایستگاه ها
+  id       String @id @default(uuid())
+  path     String // مسیر حرکت
+  stations String // ایستگاه ها
+
   Connetion Connection?
   createdAt DateTime    @default(now())
 }

@@ -34,3 +34,8 @@ export const driverSchema = z.object({
   militaryService: z.coerce.number(),
   sex: z.coerce.number(),
 });
+
+export const routeSchema = z.object({
+  path: z.string().trim().min(1),
+  stations: z.string().trim().min(1),
+});
