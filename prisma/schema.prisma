@@ -31,13 +31,13 @@ model Driver {
 
 model Vehicle {
   id                 String      @id @default(uuid())
-  vehicleName        String // اسم ماشین
+  vehicleName        String // اسم خودرو
   year               Int
+  licensePlate       String // پلاک
   insuranceDate      DateTime // تاریخ بیمه
   insuranceNo        String // شماره بیمه
   technicalCheckDate DateTime // تاریخ معاینه فنی
-  ChdNo              Int // کد ماشین
-  licensePlate       String // پلاک
+  ChdNo              Int // کد خودرو
   Connetion          Connection?
   createdAt          DateTime    @default(now())
 }
@@ -59,8 +59,6 @@ model Connection {
   secondaryDriver Driver  @relation("secondaryVehicle", fields: [secondaryDriverId], references: [id])
   vehicle         Vehicle @relation(fields: [vehicleId], references: [id])
   route           Route   @relation(fields: [routeId], references: [id])
-
-  //TODO: نوع شیفت
 
   primaryDriverId   String @unique
   secondaryDriverId String @unique

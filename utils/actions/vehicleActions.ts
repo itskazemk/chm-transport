@@ -1,44 +1,58 @@
 "use server";
 
 import db from "../db";
-import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { z } from "zod";
+import { vehicleSchema } from "../zodSchemas";
 
-const schema = z.object({
-  vehicleName: z.string().min(1),
-  year: z.number().min(1),
-  insuranceDate: z.date(),
-  insuranceNo: z.string().min(1),
-  technicalCheckDate: z.date(),
-  ChdNo: z.number().min(1),
-  licensePlate: z.number().min(1),
-});
-
-
-export async function getAllVehicle() {
-  return await db.vehicle.findMany({ orderBy: { createdAt: "desc" } });
+export async function getAllVehicles() {
+  let vehicles = await db.vehicle.findMany({ orderBy: { createdAt: "desc" } });
+  return vehicles;
 }
 
-
-export async function createVehicle(prevState: any, formData: FormData) {
+export async function createVehicle(prevState: any, data: FormData) {
   await new Promise((resolve) => setTimeout(resolve, 1000));
-
-  const vehicleName = formData.get("vehicleName");
-  const year = formData.get("year");
-  const insuranceDate = formData.get("insuranceDate");
-  const insuranceNo = formData.get("insuranceNo");
-  const technicalCheckDate = formData.get("technicalCheckDate");
-  const ChdNo = formData.get("ChdNo");
-  const licensePlate = formData.get("licensePlate");
+  const formData = Object.fromEntries(data);
+  const parsed = vehicleSchema.safeParse(formData);
+  if (!parsed.success) {
+    return { message: "Invalid form data.", result: formData };
+  }
+  // console.log("posted data, ZOD's safeParseZ", parsed);
 
   try {
-    const result = schema.parse({ vehicleName, year, insuranceDate, insuranceNo, technicalCheckDate, ChdNo, licensePlate });
-    console.error("Validation errors:", result);
-    await db.vehicle.create({ data: result });
+    const result = await db.vehicle.create({ data: parsed.data });
+    revalidatePath("/vehicles", "layout");
+    return { message: "create success", result };
+  } catch (error: any) {
+    revalidatePath("/vehicles", "layout");
+    console.log("Validation errors:", error);
+    return { message: "error", result: error };
+  }
+}
+
+export async function deleteVehicle(prevState: any, vehicleId: string) {
+  try {
+    await db.vehicle.delete({ where: { id: vehicleId } });
+    revalidatePath("/vehicles", "layout");
     return { message: "success" };
   } catch (error: any) {
-    console.log("Validation errors:", error);
     return { message: "error" };
+  }
+}
+
+export async function updateVehicle(vehicleId: string, prevState: any, data: FormData) {
+  const formData = Object.fromEntries(data);
+  const parsed = vehicleSchema.safeParse(formData);
+  if (!parsed.success) {
+    return { message: "Invalid form data." };
+  }
+
+  try {
+    const result = await db.vehicle.update({ where: { id: vehicleId }, data: parsed.data });
+    revalidatePath("/vehicles", "layout");
+    return { message: "update success", result };
+  } catch (error: any) {
+    revalidatePath("/vehicles", "layout");
+    // console.log("Validation errors:", error);
+    return { message: "error", result: error };
   }
 }
