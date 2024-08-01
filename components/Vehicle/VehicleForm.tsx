@@ -74,7 +74,7 @@ function VehicleForm({ vehicle, onSave }: VehicleFormProps) {
       formData.append(key, (data as any)[key as keyof typeof data]);
     });
 
-    // formAction(formData);
+    formAction(formData);
   };
 
   return (

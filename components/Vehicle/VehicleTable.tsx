@@ -59,8 +59,13 @@ function VehicleTable({ vehicles, onEditClick }: VehicleTableProps) {
           <thead>
             <tr>
               <th></th>
-              <th>خودرو</th>
-              <th>ایستگاه ها</th>
+              <th>نوع</th>
+              <th>مدل</th>
+              <th>پلاک</th>
+              <th>شماره بیمه</th>
+              <th>تاریخ بیمه</th>
+              <th>کد خودرو</th>
+              <th>تاریخ معاینه فنی</th>
             </tr>
           </thead>
           {/* <tbody>{content}</tbody> */}
