@@ -8,6 +8,7 @@ import { SquarePlus } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { Connection } from "@prisma/client";
 import { connectionSchema } from "@/utils/zodSchemas";
+import { createConnection, updateConnection } from "@/utils/actions/connectionActions";
 
 interface ConnectionFormProps {
   connection?: Connection | null;
@@ -23,7 +24,7 @@ const SubmitBtn = ({ editMode }: any) => {
   const { pending } = useFormStatus();
   return (
     <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} w-full`} disabled={pending}>
-      {pending ? "..." : editMode ? "ویرایش" : "ثبت مسیر جدید"}
+      {pending ? "..." : editMode ? "ویرایش" : "ثبت ارتباط جدید"}
     </button>
   );
 };
@@ -39,7 +40,7 @@ function ConnectionForm({ connection, onSave }: ConnectionFormProps) {
   });
 
   const [state, formAction] = useFormState(
-    connection ? updateRoute.bind(null, connection.id) : createRoute,
+    connection ? updateConnection.bind(null, connection.id) : createConnection,
     initialState
   );
 
@@ -80,7 +81,7 @@ function ConnectionForm({ connection, onSave }: ConnectionFormProps) {
       {state?.message && <div>{state.message}</div>}
       <div className="mb-2 flex gap-2 rounded bg-base-200 p-3">
         <SquarePlus className="text-primary" />
-        ثبت مسیر جدید
+        ثبت ارتباط جدید
       </div>
       <form
         // ------- both side validation but causes page refresh
@@ -97,11 +98,11 @@ function ConnectionForm({ connection, onSave }: ConnectionFormProps) {
         <div className="grid grid-cols-2 gap-2">
           <label className="form-control w-full max-w-xs">
             <div className="label">
-              <span className="label-text">مسیر حرکت</span>
+              <span className="label-text">شرکت</span>
             </div>
             <input
               type="text"
-              {...form.register("path")}
+              {...form.register("company")}
               // name="path"
               className="input input-bordered w-full max-w-xs"
             />
@@ -109,11 +110,63 @@ function ConnectionForm({ connection, onSave }: ConnectionFormProps) {
 
           <label className="form-control w-full max-w-xs">
             <div className="label">
-              <span className="label-text">ایستگاه ها</span>
+              <span className="label-text">شیفت</span>
             </div>
             <input
               type="text"
-              {...form.register("stations")}
+              {...form.register("shitType")}
+              // name="stations"
+              className="input input-bordered w-full max-w-xs"
+            />
+          </label>
+        </div>
+
+        <div className="grid grid-cols-2 gap-2">
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">راننده اصلی</span>
+            </div>
+            <input
+              type="text"
+              {...form.register("primaryDriverId")}
+              // name="path"
+              className="input input-bordered w-full max-w-xs"
+            />
+          </label>
+
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">راننده جایگزین</span>
+            </div>
+            <input
+              type="text"
+              {...form.register("secondaryDriverId")}
+              // name="stations"
+              className="input input-bordered w-full max-w-xs"
+            />
+          </label>
+        </div>
+
+        <div className="grid grid-cols-2 gap-2">
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">خودرو</span>
+            </div>
+            <input
+              type="text"
+              {...form.register("vehicleId")}
+              // name="path"
+              className="input input-bordered w-full max-w-xs"
+            />
+          </label>
+
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">ارتباط</span>
+            </div>
+            <input
+              type="text"
+              {...form.register("routeId")}
               // name="stations"
               className="input input-bordered w-full max-w-xs"
             />

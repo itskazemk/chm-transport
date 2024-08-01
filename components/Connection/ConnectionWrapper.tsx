@@ -1,6 +1,8 @@
 "use client";
 import { Connection } from "@prisma/client";
 import { useState } from "react";
+import ConnectionForm from "./ConnectionForm";
+import ConnectionTable from "./ConnectionTable";
 
 interface ClientWrapperProps {
   initialConnections: Connection[];
@@ -34,7 +36,7 @@ function ConnectionWrapper({ initialConnections }: ClientWrapperProps) {
         </div>
         <div className="w-full rounded-lg border border-gray-200 bg-white p-4 shadow-md sm:col-span-2 sm:p-8">
           {connections.length === 0 ? (
-            <div>مسیری ای ثبت نشده است</div>
+            <div>ارتباطی ای ثبت نشده است</div>
           ) : (
             <ConnectionTable connections={connections} onEditClick={handleEditClick} />
           )}

@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 
 const navLinks = [
   { label: "خودروها", href: "/vehicles", icon: <Bus /> },
-  { label: "رانندگان", href: "drivers", icon: <UserRound /> },
-  { label: "مسیرها", href: "routes", icon: <TrafficCone /> },
-  { label: "؟؟؟ارتباط", href: "something", icon: <Cable /> },
+  { label: "رانندگان", href: "/drivers", icon: <UserRound /> },
+  { label: "مسیرها", href: "/routes", icon: <TrafficCone /> },
+  { label: "؟؟؟ارتباط", href: "/connections", icon: <Cable /> },
 ];
 
 export default function RootLayout({

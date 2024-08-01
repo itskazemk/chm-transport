@@ -1,5 +1,6 @@
 "use client";
 
+import { deleteConnection } from "@/utils/actions/connectionActions";
 import { Connection } from "@prisma/client";
 import { Pencil, Trash2 } from "lucide-react";
 import { useEffect } from "react";
@@ -13,7 +14,7 @@ interface ConnectionTableProps {
 
 function ConnectionTable({ connections, onEditClick }: ConnectionTableProps) {
   // ----- delete
-  const [deleteState, deleteAction] = useFormState(deleteRoute, { message: "" });
+  const [deleteState, deleteAction] = useFormState(deleteConnection, { message: "" });
 
   function handleDelete(connectionId: string) {
     if (confirm("آیا از حذف مطمئن هستید؟")) {
@@ -45,7 +46,7 @@ function ConnectionTable({ connections, onEditClick }: ConnectionTableProps) {
           <thead>
             <tr>
               <th></th>
-              <th>مسیر</th>
+              <th>ارتباط</th>
               <th>ایستگاه ها</th>
             </tr>
           </thead>
@@ -54,8 +55,12 @@ function ConnectionTable({ connections, onEditClick }: ConnectionTableProps) {
             {connections.map((connection, index) => (
               <tr key={connection.id}>
                 <th>{index + 1}</th>
-                <td>{connection.path}</td>
-                <td>{connection.stations}</td>
+                <td>{connection.company}</td>
+                <td>{connection.shitType}</td>
+                <td>{connection.primaryDriverId}</td>
+                <td>{connection.secondaryDriverId}</td>
+                <td>{connection.vehicleId}</td>
+                <td>{connection.routeId}</td>
                 <td>
                   <Trash2 className="cursor-pointer hover:text-red-500" onClick={() => handleDelete(connection.id)} />
                 </td>
