@@ -141,10 +141,10 @@ function DriverForm({ driver, onSave }: DriverFormProps) {
               className="select select-bordered w-full max-w-xs"
               defaultValue={3}
             >
-              <option value="0"></option>
-              <option value="1">معافیت</option>
-              <option value="2">دارای کارت پایان خدمت</option>
-              <option value="3">بدون کارت پایان خدمت</option>
+              <option value="1">انتخاب کنید</option>
+              <option value="2">معافیت</option>
+              <option value="3">دارای کارت پایان خدمت</option>
+              <option value="4">بدون کارت پایان خدمت</option>
             </select>
           </label>
 
@@ -157,11 +157,11 @@ function DriverForm({ driver, onSave }: DriverFormProps) {
               className="select select-bordered w-full max-w-xs"
               defaultValue={1}
             >
-              <option value="0"></option>
-              <option value="1">زیر دیپلم</option>
-              <option value="2">دیپلم</option>
-              <option value="3">لیسانس</option>
-              <option value="4">فوق لیسانس</option>
+              <option value="1">انتخاب کنید</option>
+              <option value="2">زیر دیپلم</option>
+              <option value="3">دیپلم</option>
+              <option value="4">لیسانس</option>
+              <option value="5">فوق لیسانس</option>
             </select>
           </label>
           <label className="form-control w-full max-w-xs">
@@ -173,9 +173,9 @@ function DriverForm({ driver, onSave }: DriverFormProps) {
               className="select select-bordered w-full max-w-xs"
               defaultValue={0}
             >
-              <option value="0"></option>
-              <option value="1">مرد</option>
-              <option value="2">زن</option>
+              <option value="1">انتخاب کنید</option>
+              <option value="2">مرد</option>
+              <option value="3">زن</option>
             </select>
           </label>
         </div>

@@ -93,31 +93,31 @@ function RouteForm({ route, onSave }: RouteFormProps) {
         // ------- only server side validation OKAY
         // action={formAction}
       >
-        <div className="grid grid-cols-2 gap-2">
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">مسیر حرکت</span>
-            </div>
-            <input
-              type="text"
-              {...form.register("path")}
-              // name="path"
-              className="input input-bordered w-full max-w-xs"
-            />
-          </label>
+        {/* <div className="grid grid-cols-2 gap-2"> */}
+        <label className="form-control w-full">
+          <div className="label">
+            <span className="label-text">مسیر حرکت</span>
+          </div>
+          <input
+            type="text"
+            {...form.register("path")}
+            // name="path"
+            className="input input-bordered w-full"
+          />
+        </label>
 
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">ایستگاه ها</span>
-            </div>
-            <input
-              type="text"
-              {...form.register("stations")}
-              // name="stations"
-              className="input input-bordered w-full max-w-xs"
-            />
-          </label>
-        </div>
+        <label className="form-control w-full">
+          <div className="label">
+            <span className="label-text">ایستگاه ها</span>
+          </div>
+          <input
+            type="text"
+            {...form.register("stations")}
+            // name="stations"
+            className="input input-bordered w-full"
+          />
+        </label>
+        {/* </div> */}
 
         <div className="mt-5">
           <SubmitBtn editMode={!!route} />

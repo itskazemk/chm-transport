@@ -20,6 +20,22 @@ import toast, { Toaster } from "react-hot-toast";
 //   createdAt: Date;
 // }
 
+enum MilitaryServiceEnum {
+  "انتخاب نشده" = 1,
+  "کارت پایان خدمت",
+  "معافیت",
+  "ندارد",
+}
+enum DegreeEnum {
+  "انتخاب نشده" = 1,
+  "ابتدایی",
+  "متوسطه",
+  "دیپلم",
+  "فوق دیپلم",
+  "لیسانس",
+  "فوق لیسانس",
+}
+
 interface DriverTableProps {
   drivers: Driver[];
   onEditClick: Function;
@@ -78,8 +94,8 @@ function DriverTable({ drivers, onEditClick }: DriverTableProps) {
                 <td>{driver.nationalId}</td>
                 <td>{driver.phoneNumber}</td>
                 <td>{driver.bankAccount}</td>
-                <td>{driver.militaryService}</td>
-                <td>{driver.degree}</td>
+                <td>{MilitaryServiceEnum[driver.militaryService]}</td>
+                <td>{DegreeEnum[driver.degree]}</td>
                 <td>
                   <Trash2 className="cursor-pointer hover:text-red-500" onClick={() => handleDelete(driver.id)} />
                 </td>

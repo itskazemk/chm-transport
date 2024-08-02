@@ -3,25 +3,26 @@ import { Connection, Driver, Route, Vehicle } from "@prisma/client";
 import { useState } from "react";
 import ConnectionForm from "./ConnectionForm";
 import ConnectionTable from "./ConnectionTable";
+import { ConnectionWithIncludes } from "@/utils/zodSchemas";
 
 interface ClientWrapperProps {
-  initialConnections: Connection[];
+  initialConnections: ConnectionWithIncludes[];
   driversOption: Driver[];
   vehiclesOption: Vehicle[];
   routesOption: Route[];
 }
 
 function ConnectionWrapper({ initialConnections, driversOption, vehiclesOption, routesOption }: ClientWrapperProps) {
-  const [connections, setConnections] = useState<Connection[]>(initialConnections);
+  const [connections, setConnections] = useState<ConnectionWithIncludes[]>(initialConnections);
   const [currentConnection, setCurrentConnection] = useState<Connection | null>(null);
 
   const handleEditClick = (Connection: Connection) => {
     setCurrentConnection(Connection);
   };
 
-  const updateConnectionList = (updatedConnection: Connection) => {
+  const updateConnectionList = (updatedConnection: ConnectionWithIncludes) => {
     if (updatedConnection) {
-      console.log(updatedConnection);
+      // console.log(updatedConnection);
       setConnections(
         connections.map((connection) => (connection.id === updatedConnection.id ? updatedConnection : connection))
       );

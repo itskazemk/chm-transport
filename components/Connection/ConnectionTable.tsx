@@ -1,62 +1,16 @@
 "use client";
 
 import { deleteConnection } from "@/utils/actions/connectionActions";
+import { CompanyEnum, ConnectionWithIncludes, ShiftTypeEnum } from "@/utils/zodSchemas";
 // import { Connection } from "@prisma/client";
 import { Pencil, Trash2 } from "lucide-react";
 import { useEffect } from "react";
 import { useFormState } from "react-dom";
 import toast, { Toaster } from "react-hot-toast";
 
-interface Driver {
-  id: string;
-  firstName: string;
-  lastName: string;
-  nationalId: string;
-  phoneNumber: string;
-  bankAccount: string;
-  degree: number;
-  militaryService: number;
-  sex: number;
-  createdAt: Date;
-}
-
-interface Vehicle {
-  id: string;
-  vehicleName: string;
-  year: number;
-  licensePlate: string;
-  insuranceDate?: Date;
-  insuranceNo: string;
-  technicalCheckDate?: Date;
-  ChdNo: number;
-  createdAt: Date;
-}
-
-interface Route {
-  id: string;
-  path: string;
-  stations: string;
-  createdAt: Date;
-}
-
-interface Connection {
-  id: string;
-  company?: number;
-  shitType?: number;
-  primaryDriver: Driver;
-  secondaryDriver: Driver;
-  vehicle: Vehicle;
-  route: Route;
-  primaryDriverId: string;
-  secondaryDriverId: string;
-  vehicleId: string;
-  routeId: string;
-  createdAt: Date;
-}
-
 interface ConnectionTableProps {
-  connections: Connection[];
-  onEditClick: (connection: Connection) => void;
+  connections: ConnectionWithIncludes[];
+  onEditClick: Function;
 }
 
 function ConnectionTable({ connections, onEditClick }: ConnectionTableProps) {
@@ -93,8 +47,12 @@ function ConnectionTable({ connections, onEditClick }: ConnectionTableProps) {
           <thead>
             <tr>
               <th></th>
-              <th>ارتباط</th>
-              <th>ایستگاه ها</th>
+              <th>شرکت</th>
+              <th>نوع شیفت</th>
+              <th>راننده</th>
+              <th>راننده کمکی</th>
+              <th>خودرو</th>
+              <th>مسیر</th>
             </tr>
           </thead>
           {/* <tbody>{content}</tbody> */}
@@ -102,8 +60,8 @@ function ConnectionTable({ connections, onEditClick }: ConnectionTableProps) {
             {connections.map((connection, index) => (
               <tr key={connection.id}>
                 <th>{index + 1}</th>
-                <td>{connection.company}</td>
-                <td>{connection.shitType}</td>
+                <td>{CompanyEnum[connection.company]}</td>
+                <td>{ShiftTypeEnum[connection.shiftType]}</td>
                 <td>
                   {connection.primaryDriver.firstName}-{connection.primaryDriver.lastName}
                 </td>

@@ -1,26 +1,63 @@
 import { z } from "zod";
 
-// enum Degree {
-//   "زیر دیپلم" = 0,
-//   "دیپلم",
-//   "کاردانی",
-//   "کارشناسی",
-//   "کارشناسی ارشد",
-// }
+interface Driver {
+  id: string;
+  firstName: string;
+  lastName: string;
+  nationalId: string;
+  phoneNumber: string;
+  bankAccount: string;
+  degree: number;
+  militaryService: number;
+  sex: number;
+  createdAt: Date;
+}
 
-// const degreeTitles: Record<Degree, Number> = {
-//   [Degree["زیر دیپلم"]]: 0,
-//   [Degree["دیپلم"]]: 1,
-//   [Degree['کاردانی']]: 2,
-//   [Degree['کارشناسی']]: 3,
-//   [Degree["کارشناسی ارشد"]]: 3,
-// };
+interface Vehicle {
+  id: string;
+  vehicleName: string;
+  year: number;
+  licensePlate: string;
+  insuranceDate?: Date;
+  insuranceNo: string;
+  technicalCheckDate?: Date;
+  ChdNo: number;
+  createdAt: Date;
+}
 
-// enum MilitaryService {
-//   MOAF = "MOAF",
-//   RAFTE = "RAFTE",
-//   NARFTE = "NARFTE",
-// }
+interface Route {
+  id: string;
+  path: string;
+  stations: string;
+  createdAt: Date;
+}
+
+export interface ConnectionWithIncludes {
+  id: string;
+  company: number;
+  shiftType: number;
+  primaryDriver: Driver;
+  secondaryDriver: Driver;
+  vehicle: Vehicle;
+  route: Route;
+  primaryDriverId: string;
+  secondaryDriverId: string;
+  vehicleId: string;
+  routeId: string;
+  createdAt: Date;
+}
+
+export enum CompanyEnum {
+  "انتخاب نشده" = 1,
+  "پامیدکو",
+  "چادرملو",
+}
+
+export enum ShiftTypeEnum {
+  "انتخاب نشده" = 1,
+  "روزکار" = 2,
+  "شیفت" = 3,
+}
 
 export const driverSchema = z.object({
   firstName: z.string().trim().min(1),
@@ -72,9 +109,9 @@ export const vehicleSchema = z.object({
 
 export const connectionSchema = z.object({
   company: z.coerce.number(),
-  shitType: z.coerce.number(),
-  primaryDriverId: z.string().trim().min(1),
-  secondaryDriverId: z.string().trim().min(1),
-  vehicleId: z.string().trim().min(1),
-  routeId: z.string().trim().min(1),
+  shiftType: z.coerce.number(),
+  primaryDriverId: z.string().trim().min(2),
+  secondaryDriverId: z.string().trim().min(2),
+  vehicleId: z.string().trim().min(2),
+  routeId: z.string().trim().min(2),
 });

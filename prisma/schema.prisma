@@ -24,13 +24,13 @@ model Driver {
   militaryService Int // سربازی
   sex             Int
 
-  primaryVehicle   Connection? @relation("primaryVehicle")
-  secondaryVehicle Connection? @relation("secondaryVehicle")
-  createdAt        DateTime    @default(now())
+  primaryVehicle   Connection[] @relation("primaryVehicle")
+  secondaryVehicle Connection[] @relation("secondaryVehicle")
+  createdAt        DateTime     @default(now())
 }
 
 model Vehicle {
-  id                 String      @id @default(uuid())
+  id                 String       @id @default(uuid())
   vehicleName        String // اسم خودرو
   year               Int
   licensePlate       String // پلاک
@@ -38,8 +38,8 @@ model Vehicle {
   insuranceNo        String // شماره بیمه
   technicalCheckDate DateTime? // تاریخ معاینه فنی
   ChdNo              Int // کد خودرو
-  Connetion          Connection?
-  createdAt          DateTime    @default(now())
+  Connetion          Connection[]
+  createdAt          DateTime     @default(now())
 }
 
 model Route {
@@ -47,23 +47,23 @@ model Route {
   path     String // مسیر حرکت
   stations String // ایستگاه ها
 
-  Connetion Connection?
-  createdAt DateTime    @default(now())
+  Connetion Connection[]
+  createdAt DateTime     @default(now())
 }
 
 model Connection {
   id              String  @id @default(uuid())
-  company         Int? // شرکت
-  shitType        Int?
+  company         Int // شرکت
+  shiftType       Int
   primaryDriver   Driver  @relation("primaryVehicle", fields: [primaryDriverId], references: [id])
   secondaryDriver Driver  @relation("secondaryVehicle", fields: [secondaryDriverId], references: [id])
   vehicle         Vehicle @relation(fields: [vehicleId], references: [id])
   route           Route   @relation(fields: [routeId], references: [id])
 
-  primaryDriverId   String @unique
-  secondaryDriverId String @unique
-  vehicleId         String @unique
-  routeId           String @unique
+  primaryDriverId   String
+  secondaryDriverId String
+  vehicleId         String
+  routeId           String
 
   createdAt DateTime @default(now())
 }
