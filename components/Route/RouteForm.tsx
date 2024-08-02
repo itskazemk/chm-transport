@@ -4,7 +4,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SquarePlus } from "lucide-react";
+import { PencilOff, SquarePlus } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { Route } from "@prisma/client";
 import { routeSchema } from "@/utils/zodSchemas";
@@ -20,12 +20,17 @@ interface FormState {
   result: any;
 }
 
-const SubmitBtn = ({ editMode }: any) => {
+const SubmitBtn = ({ editMode, resetForm }: any) => {
   const { pending } = useFormStatus();
   return (
-    <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} w-full`} disabled={pending}>
-      {pending ? "..." : editMode ? "ویرایش" : "ثبت مسیر جدید"}
-    </button>
+    <div className="grid grid-cols-4 gap-2">
+      <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-3`} disabled={pending}>
+        {pending ? "..." : editMode ? "ویرایش" : "ثبت مسیر جدید"}
+      </button>
+      <button type="button" className="btn col-span-1" onClick={resetForm}>
+        <PencilOff />
+      </button>
+    </div>
   );
 };
 
@@ -34,7 +39,7 @@ const initialState: FormState = {
   result: null,
 };
 
-function RouteForm({ route, onSave }: RouteFormProps) {
+function RouteForm({ route, onSave, setCurrentRoute }: RouteFormProps) {
   const form = useForm<z.output<typeof routeSchema>>({
     resolver: zodResolver(routeSchema),
   });
@@ -70,6 +75,11 @@ function RouteForm({ route, onSave }: RouteFormProps) {
     });
     formAction(formData);
   };
+
+  function resetForm() {
+    form.reset();
+    setCurrentRoute(null);
+  }
 
   return (
     <>
@@ -120,7 +130,7 @@ function RouteForm({ route, onSave }: RouteFormProps) {
         {/* </div> */}
 
         <div className="mt-5">
-          <SubmitBtn editMode={!!route} />
+          <SubmitBtn editMode={!!route} resetForm={resetForm} />
         </div>
       </form>
     </>
