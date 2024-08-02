@@ -82,12 +82,13 @@ export default function RootLayout({
                 <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu min-h-full w-80 bg-base-200 p-4">
                   {/* Sidebar content here */}
-                  <li>
-                    <a>Sidebar Item 1</a>
-                  </li>
-                  <li>
-                    <a>Sidebar Item 2</a>
-                  </li>
+                  {navLinks.map((link) => (
+                    <li key={link.label}>
+                      <Link href={link.href}>
+                        {link.label} {link.icon}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
