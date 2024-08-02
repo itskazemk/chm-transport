@@ -21,7 +21,7 @@ enum MilitaryServiceEnum {
   "بدون کارت پایان خدمت",
 }
 
-export async function getAllDriver() {
+export async function getAllDrivers() {
   let drivers = await db.driver.findMany({ orderBy: { createdAt: "desc" } });
   // const driverWithEnums = drivers.map((driver) => {
   //   let degreeNum = driver.degree;

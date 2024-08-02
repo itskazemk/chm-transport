@@ -1,11 +1,24 @@
 import ConnectionWrapper from "@/components/Connection/ConnectionWrapper";
 import { getAllConnections } from "@/utils/actions/connectionActions";
-import { getAllDriver } from "@/utils/actions/driverActions";
+import { getAllDrivers } from "@/utils/actions/driverActions";
+import { getAllRoutes } from "@/utils/actions/routeActions";
+import { getAllVehicles } from "@/utils/actions/vehicleActions";
 
 async function ConnectionPage() {
   const connections = await getAllConnections();
+  const driversOption = await getAllDrivers();
+  const vehiclesOption = await getAllVehicles();
+  const routesOption = await getAllRoutes();
 
-  return <ConnectionWrapper key={connections.length} initialConnections={connections} />;
+  return (
+    <ConnectionWrapper
+      key={connections.length}
+      initialConnections={connections}
+      driversOption={driversOption}
+      vehiclesOption={vehiclesOption}
+      routesOption={routesOption}
+    />
+  );
 }
 
 export default ConnectionPage;

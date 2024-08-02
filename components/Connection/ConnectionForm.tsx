@@ -6,13 +6,16 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SquarePlus } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
-import { Connection } from "@prisma/client";
+import { Connection, Driver, Route, Vehicle } from "@prisma/client";
 import { connectionSchema } from "@/utils/zodSchemas";
 import { createConnection, updateConnection } from "@/utils/actions/connectionActions";
 
 interface ConnectionFormProps {
   connection?: Connection | null;
   onSave: Function;
+  driversOption: Driver[];
+  vehiclesOption: Vehicle[];
+  routesOption: Route[];
 }
 
 interface FormState {
@@ -34,7 +37,7 @@ const initialState: FormState = {
   result: null,
 };
 
-function ConnectionForm({ connection, onSave }: ConnectionFormProps) {
+function ConnectionForm({ connection, onSave, driversOption, vehiclesOption, routesOption }: ConnectionFormProps) {
   const form = useForm<z.output<typeof connectionSchema>>({
     resolver: zodResolver(connectionSchema),
   });
@@ -100,24 +103,22 @@ function ConnectionForm({ connection, onSave }: ConnectionFormProps) {
             <div className="label">
               <span className="label-text">شرکت</span>
             </div>
-            <input
-              type="text"
-              {...form.register("company")}
-              // name="path"
-              className="input input-bordered w-full max-w-xs"
-            />
+            <select {...form.register("company")} className="input input-bordered w-full max-w-xs">
+              <option value={0}>انتخاب کنید</option>
+              <option value={1}>پامیدکو</option>
+              <option value={2}>چادرملو</option>
+            </select>
           </label>
 
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">شیفت</span>
             </div>
-            <input
-              type="text"
-              {...form.register("shitType")}
-              // name="stations"
-              className="input input-bordered w-full max-w-xs"
-            />
+            <select {...form.register("shitType")} className="input input-bordered w-full max-w-xs">
+              <option value={0}>انتخاب کنید</option>
+              <option value={1}>عادی</option>
+              <option value={2}>شیفت</option>
+            </select>
           </label>
         </div>
 
@@ -126,24 +127,26 @@ function ConnectionForm({ connection, onSave }: ConnectionFormProps) {
             <div className="label">
               <span className="label-text">راننده اصلی</span>
             </div>
-            <input
-              type="text"
-              {...form.register("primaryDriverId")}
-              // name="path"
-              className="input input-bordered w-full max-w-xs"
-            />
+            <select {...form.register("primaryDriverId")} className="input input-bordered w-full max-w-xs">
+              {driversOption.map((driver) => (
+                <option key={driver.id} value={driver.id}>
+                  {driver.firstName}-{driver.lastName}
+                </option>
+              ))}
+            </select>
           </label>
 
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">راننده جایگزین</span>
             </div>
-            <input
-              type="text"
-              {...form.register("secondaryDriverId")}
-              // name="stations"
-              className="input input-bordered w-full max-w-xs"
-            />
+            <select {...form.register("secondaryDriverId")} className="input input-bordered w-full max-w-xs">
+              {driversOption.map((driver) => (
+                <option key={driver.id} value={driver.id}>
+                  {driver.firstName}-{driver.lastName}
+                </option>
+              ))}
+            </select>
           </label>
         </div>
 
@@ -152,24 +155,26 @@ function ConnectionForm({ connection, onSave }: ConnectionFormProps) {
             <div className="label">
               <span className="label-text">خودرو</span>
             </div>
-            <input
-              type="text"
-              {...form.register("vehicleId")}
-              // name="path"
-              className="input input-bordered w-full max-w-xs"
-            />
+            <select {...form.register("vehicleId")} className="input input-bordered w-full max-w-xs">
+              {vehiclesOption.map((vehicle) => (
+                <option key={vehicle.id} value={vehicle.id}>
+                  {vehicle.vehicleName}-{vehicle.year}-{vehicle.licensePlate}
+                </option>
+              ))}
+            </select>
           </label>
 
           <label className="form-control w-full max-w-xs">
             <div className="label">
-              <span className="label-text">ارتباط</span>
+              <span className="label-text">مسیر</span>
             </div>
-            <input
-              type="text"
-              {...form.register("routeId")}
-              // name="stations"
-              className="input input-bordered w-full max-w-xs"
-            />
+            <select {...form.register("routeId")} className="input input-bordered w-full max-w-xs">
+              {routesOption.map((route) => (
+                <option key={route.id} value={route.id}>
+                  {route.path}-{route.stations}
+                </option>
+              ))}
+            </select>
           </label>
         </div>
 

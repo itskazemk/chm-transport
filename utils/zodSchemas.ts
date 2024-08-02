@@ -71,8 +71,8 @@ export const vehicleSchema = z.object({
 });
 
 export const connectionSchema = z.object({
-  company: z.number(),
-  shitType: z.number(),
+  company: z.coerce.number(),
+  shitType: z.coerce.number(),
   primaryDriverId: z.string().trim().min(1),
   secondaryDriverId: z.string().trim().min(1),
   vehicleId: z.string().trim().min(1),

@@ -5,7 +5,15 @@ import { revalidatePath } from "next/cache";
 import { connectionSchema } from "../zodSchemas";
 
 export async function getAllConnections() {
-  let connection = await db.connection.findMany({ orderBy: { createdAt: "desc" } });
+  let connection = await db.connection.findMany({
+    orderBy: { createdAt: "desc" },
+    include: {
+      primaryDriver: true,
+      secondaryDriver: true,
+      vehicle: true,
+      route: true,
+    },
+  });
   return connection;
 }
 

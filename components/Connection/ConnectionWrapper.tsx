@@ -1,14 +1,17 @@
 "use client";
-import { Connection } from "@prisma/client";
+import { Connection, Driver, Route, Vehicle } from "@prisma/client";
 import { useState } from "react";
 import ConnectionForm from "./ConnectionForm";
 import ConnectionTable from "./ConnectionTable";
 
 interface ClientWrapperProps {
   initialConnections: Connection[];
+  driversOption: Driver[];
+  vehiclesOption: Vehicle[];
+  routesOption: Route[];
 }
 
-function ConnectionWrapper({ initialConnections }: ClientWrapperProps) {
+function ConnectionWrapper({ initialConnections, driversOption, vehiclesOption, routesOption }: ClientWrapperProps) {
   const [connections, setConnections] = useState<Connection[]>(initialConnections);
   const [currentConnection, setCurrentConnection] = useState<Connection | null>(null);
 
@@ -31,7 +34,13 @@ function ConnectionWrapper({ initialConnections }: ClientWrapperProps) {
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
         <div className="sm:col-span-1">
           <div className="w-full rounded-lg border border-gray-200 bg-white p-4 shadow-md sm:p-8">
-            <ConnectionForm connection={currentConnection} onSave={updateConnectionList} />
+            <ConnectionForm
+              connection={currentConnection}
+              onSave={updateConnectionList}
+              driversOption={driversOption}
+              vehiclesOption={vehiclesOption}
+              routesOption={routesOption}
+            />
           </div>
         </div>
         <div className="w-full rounded-lg border border-gray-200 bg-white p-4 shadow-md sm:col-span-2 sm:p-8">

@@ -1,8 +1,8 @@
 import DriverWrapper from "@/components/Driver/DriverWrapper";
-import { getAllDriver } from "@/utils/actions/driverActions";
+import { getAllDrivers } from "@/utils/actions/driverActions";
 
 async function DriversPage() {
-  const drivers = await getAllDriver();
+  const drivers = await getAllDrivers();
 
   return <DriverWrapper key={drivers.length} initialDrivers={drivers} />;
 }
