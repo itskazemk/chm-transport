@@ -35,4 +35,8 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-#1 برای ثبت فرم ها نوتیف نمیاد ولی برای بروز رسانی میاد
+## TODOs
+
+- برای ثبت فرم ها نوتیف نمیاد ولی برای بروز رسانی میاد
+- نمایش دراپ دون ها باید قابلیت سرچ
+- در فرم راننده اینپوت پلاک باید ۳ بخشی شود
