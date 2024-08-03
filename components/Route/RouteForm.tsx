@@ -13,12 +13,15 @@ import { createRoute, updateRoute } from "@/utils/actions/routeActions";
 interface RouteFormProps {
   route?: Route | null;
   onSave: Function;
+  setCurrentRoute: Function;
 }
 
 interface FormState {
   message: string;
   result: any;
 }
+
+const formDefaultValues = { path: "", stations: "" };
 
 const SubmitBtn = ({ editMode, resetForm }: any) => {
   const { pending } = useFormStatus();
@@ -42,6 +45,7 @@ const initialState: FormState = {
 function RouteForm({ route, onSave, setCurrentRoute }: RouteFormProps) {
   const form = useForm<z.output<typeof routeSchema>>({
     resolver: zodResolver(routeSchema),
+    defaultValues: formDefaultValues,
   });
 
   const [state, formAction] = useFormState(route ? updateRoute.bind(null, route.id) : createRoute, initialState);
@@ -77,7 +81,7 @@ function RouteForm({ route, onSave, setCurrentRoute }: RouteFormProps) {
   };
 
   function resetForm() {
-    form.reset();
+    form.reset(formDefaultValues);
     setCurrentRoute(null);
   }
 
