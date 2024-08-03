@@ -32,7 +32,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODOs
 
-- برای ثبت فرم ها نوتیف نمیاد ولی برای بروز رسانی میاد
-- نمایش دراپ دون ها باید قابلیت سرچ
-- در فرم راننده اینپوت پلاک باید ۳ بخشی شود
-- سر تیتر در تب مرورگر هنگام تغییر صفحات
+- [ ] when submitting new record in forms, success notif is not working
+- [ ] select options with search feature
+- [ ] improve license plate input UI
+- [ ] change tab title in different urls
+- [ ] improve navbar's links to be highlighted when opening url
