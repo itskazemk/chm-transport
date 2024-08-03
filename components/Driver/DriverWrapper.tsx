@@ -31,7 +31,7 @@ function ClientWrapper({ initialDrivers }: ClientWrapperProps) {
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
         <div className="sm:col-span-1">
           <div className="w-full rounded-lg border border-gray-200 bg-white p-4 shadow-md sm:p-8">
-            <DriverForm driver={currentDriver} onSave={updateDriverList} />
+            <DriverForm driver={currentDriver} onSave={updateDriverList} setCurrentDriver={setCurrentDriver} />
           </div>
         </div>
         <div className="w-full rounded-lg border border-gray-200 bg-white p-4 shadow-md sm:col-span-2 sm:p-8">

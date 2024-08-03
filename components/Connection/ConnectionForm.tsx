@@ -4,7 +4,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SquarePlus } from "lucide-react";
+import { PencilOff, SquarePlus } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { Connection, Driver, Route, Vehicle } from "@prisma/client";
 import { connectionSchema } from "@/utils/zodSchemas";
@@ -13,6 +13,7 @@ import { createConnection, updateConnection } from "@/utils/actions/connectionAc
 interface ConnectionFormProps {
   connection?: Connection | null;
   onSave: Function;
+  setCurrentConnection: Function;
   driversOption: Driver[];
   vehiclesOption: Vehicle[];
   routesOption: Route[];
@@ -23,12 +24,26 @@ interface FormState {
   result: any;
 }
 
-const SubmitBtn = ({ editMode }: any) => {
+const formDefaultValues = {
+  company: 1,
+  shiftType: 1,
+  primaryDriverId: "0",
+  secondaryDriverId: "0",
+  vehicleId: "0",
+  routeId: "0",
+};
+
+const SubmitBtn = ({ editMode, resetForm }: any) => {
   const { pending } = useFormStatus();
   return (
-    <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} w-full`} disabled={pending}>
-      {pending ? "..." : editMode ? "ویرایش" : "ثبت ارتباط جدید"}
-    </button>
+    <div className="grid grid-cols-4 gap-2">
+      <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-3`} disabled={pending}>
+        {pending ? "..." : editMode ? "ویرایش" : "ثبت ارتباط جدید"}
+      </button>
+      <button type="button" className="btn col-span-1" onClick={resetForm}>
+        <PencilOff />
+      </button>
+    </div>
   );
 };
 
@@ -37,9 +52,17 @@ const initialState: FormState = {
   result: null,
 };
 
-function ConnectionForm({ connection, onSave, driversOption, vehiclesOption, routesOption }: ConnectionFormProps) {
+function ConnectionForm({
+  connection,
+  onSave,
+  driversOption,
+  vehiclesOption,
+  routesOption,
+  setCurrentConnection,
+}: ConnectionFormProps) {
   const form = useForm<z.output<typeof connectionSchema>>({
     resolver: zodResolver(connectionSchema),
+    defaultValues: formDefaultValues,
   });
 
   const [state, formAction] = useFormState(
@@ -76,6 +99,11 @@ function ConnectionForm({ connection, onSave, driversOption, vehiclesOption, rou
     });
     formAction(formData);
   };
+
+  function resetForm() {
+    form.reset(formDefaultValues);
+    setCurrentConnection(null);
+  }
 
   return (
     <>
@@ -184,7 +212,7 @@ function ConnectionForm({ connection, onSave, driversOption, vehiclesOption, rou
         </div>
 
         <div className="mt-5">
-          <SubmitBtn editMode={!!connection} />
+          <SubmitBtn editMode={!!connection} resetForm={resetForm} />
         </div>
       </form>
     </>

@@ -41,6 +41,7 @@ function ConnectionWrapper({ initialConnections, driversOption, vehiclesOption, 
               driversOption={driversOption}
               vehiclesOption={vehiclesOption}
               routesOption={routesOption}
+              setCurrentConnection={setCurrentConnection}
             />
           </div>
         </div>

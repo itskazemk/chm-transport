@@ -7,13 +7,14 @@ import { driverSchema } from "@/utils/zodSchemas";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SquarePlus } from "lucide-react";
+import { PencilOff, SquarePlus } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { Driver } from "@prisma/client";
 
 interface DriverFormProps {
   driver?: Driver | null;
   onSave: Function;
+  setCurrentDriver: Function;
 }
 
 interface FormState {
@@ -21,12 +22,28 @@ interface FormState {
   result: any;
 }
 
-const SubmitBtn = ({ editMode }: any) => {
+const formDefaultValues = {
+  firstName: "",
+  lastName: "",
+  nationalId: "",
+  phoneNumber: "",
+  bankAccount: "",
+  degree: 1,
+  militaryService: 1,
+  sex: 1,
+};
+
+const SubmitBtn = ({ editMode, resetForm }: any) => {
   const { pending } = useFormStatus();
   return (
-    <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} w-full`} disabled={pending}>
-      {pending ? "..." : editMode ? "ویرایش" : "ثبت راننده جدید"}
-    </button>
+    <div className="grid grid-cols-4 gap-2">
+      <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-3`} disabled={pending}>
+        {pending ? "..." : editMode ? "ویرایش" : "ثبت مسیر جدید"}
+      </button>
+      <button type="button" className="btn col-span-1" onClick={resetForm}>
+        <PencilOff />
+      </button>
+    </div>
   );
 };
 
@@ -35,9 +52,10 @@ const initialState: FormState = {
   result: null,
 };
 
-function DriverForm({ driver, onSave }: DriverFormProps) {
+function DriverForm({ driver, onSave, setCurrentDriver }: DriverFormProps) {
   const form = useForm<z.output<typeof driverSchema>>({
     resolver: zodResolver(driverSchema),
+    defaultValues: formDefaultValues,
   });
 
   const [state, formAction] = useFormState(driver ? updateDriver.bind(null, driver.id) : createDriver, initialState);
@@ -70,6 +88,11 @@ function DriverForm({ driver, onSave }: DriverFormProps) {
     });
     formAction(formData);
   };
+
+  function resetForm() {
+    form.reset(formDefaultValues);
+    setCurrentDriver(null);
+  }
 
   return (
     <>
@@ -139,7 +162,7 @@ function DriverForm({ driver, onSave }: DriverFormProps) {
             <select
               {...form.register("militaryService", { valueAsNumber: true })} // تبدیل ورودی که بصورت استریگ است به عدد
               className="select select-bordered w-full max-w-xs"
-              defaultValue={3}
+              defaultValue={1}
             >
               <option value="1">انتخاب کنید</option>
               <option value="2">معافیت</option>
@@ -171,7 +194,7 @@ function DriverForm({ driver, onSave }: DriverFormProps) {
             <select
               {...form.register("sex", { valueAsNumber: true })}
               className="select select-bordered w-full max-w-xs"
-              defaultValue={0}
+              defaultValue={1}
             >
               <option value="1">انتخاب کنید</option>
               <option value="2">مرد</option>
@@ -181,7 +204,7 @@ function DriverForm({ driver, onSave }: DriverFormProps) {
         </div>
 
         <div className="mt-5">
-          <SubmitBtn editMode={!!driver} />
+          <SubmitBtn editMode={!!driver} resetForm={resetForm} />
         </div>
       </form>
     </>

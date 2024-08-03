@@ -4,7 +4,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SquarePlus } from "lucide-react";
+import { PencilOff, SquarePlus } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { Vehicle } from "@prisma/client";
 import { vehicleSchema } from "@/utils/zodSchemas";
@@ -14,6 +14,7 @@ import DatePickerInput from "../SimpleInputs";
 interface VehicleFormProps {
   vehicle?: Vehicle | null;
   onSave: Function;
+  setCurrentVehicle: Function;
 }
 
 interface FormState {
@@ -21,12 +22,17 @@ interface FormState {
   result: any;
 }
 
-const SubmitBtn = ({ editMode }: any) => {
+const SubmitBtn = ({ editMode, resetForm }: any) => {
   const { pending } = useFormStatus();
   return (
-    <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} w-full`} disabled={pending}>
-      {pending ? "..." : editMode ? "ویرایش" : "ثبت خودرو جدید"}
-    </button>
+    <div className="grid grid-cols-4 gap-2">
+      <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-3`} disabled={pending}>
+        {pending ? "..." : editMode ? "ویرایش" : "ثبت خودرو جدید"}
+      </button>
+      <button type="button" className="btn col-span-1" onClick={resetForm}>
+        <PencilOff />
+      </button>
+    </div>
   );
 };
 
@@ -35,9 +41,20 @@ const initialState: FormState = {
   result: null,
 };
 
-function VehicleForm({ vehicle, onSave }: VehicleFormProps) {
+const formDefaultValues = {
+  vehicleName: "",
+  year: 0,
+  insuranceDate: null,
+  insuranceNo: "",
+  technicalCheckDate: null,
+  ChdNo: 0,
+  licensePlate: "",
+};
+
+function VehicleForm({ vehicle, onSave, setCurrentVehicle }: VehicleFormProps) {
   const form = useForm<z.output<typeof vehicleSchema>>({
     resolver: zodResolver(vehicleSchema),
+    defaultValues: formDefaultValues,
   });
 
   const [state, formAction] = useFormState(
@@ -76,6 +93,11 @@ function VehicleForm({ vehicle, onSave }: VehicleFormProps) {
 
     formAction(formData);
   };
+
+  function resetForm() {
+    form.reset(formDefaultValues);
+    setCurrentVehicle(null);
+  }
 
   return (
     <>
@@ -197,7 +219,7 @@ function VehicleForm({ vehicle, onSave }: VehicleFormProps) {
         </div>
         {/* </div> */}
         <div className="mt-5">
-          <SubmitBtn editMode={!!vehicle} />
+          <SubmitBtn editMode={!!vehicle} resetForm={resetForm} />
         </div>
       </form>
     </>
