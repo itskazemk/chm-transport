@@ -22,16 +22,16 @@ interface FormState {
   result: any;
 }
 
-const SubmitBtn = ({ editMode, resetForm }: any) => {
+const SubmitBtn = ({ editMode /* resetForm */ }: any) => {
   const { pending } = useFormStatus();
   return (
     <div className="grid grid-cols-4 gap-2">
-      <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-3`} disabled={pending}>
+      <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-4`} disabled={pending}>
         {pending ? "..." : editMode ? "ویرایش" : "ثبت خودرو جدید"}
       </button>
-      <button type="button" className="btn col-span-1" onClick={resetForm}>
+      {/* <button type="button" className="btn col-span-1" onClick={resetForm}>
         <PencilOff />
-      </button>
+      </button> */}
     </div>
   );
 };
@@ -43,11 +43,11 @@ const initialState: FormState = {
 
 const formDefaultValues = {
   vehicleName: "",
-  year: 0,
+  year: null,
   insuranceDate: null,
   insuranceNo: "",
   technicalCheckDate: null,
-  ChdNo: 0,
+  ChdNo: null,
   licensePlate: "",
 };
 
@@ -94,10 +94,10 @@ function VehicleForm({ vehicle, onSave, setCurrentVehicle }: VehicleFormProps) {
     formAction(formData);
   };
 
-  function resetForm() {
-    form.reset(formDefaultValues);
-    setCurrentVehicle(null);
-  }
+  // function resetForm() {
+  //   form.reset(formDefaultValues);
+  //   setCurrentVehicle(null);
+  // }
 
   return (
     <>
@@ -219,7 +219,7 @@ function VehicleForm({ vehicle, onSave, setCurrentVehicle }: VehicleFormProps) {
         </div>
         {/* </div> */}
         <div className="mt-5">
-          <SubmitBtn editMode={!!vehicle} resetForm={resetForm} />
+          <SubmitBtn editMode={!!vehicle} /* resetForm={resetForm} */ />
         </div>
       </form>
     </>

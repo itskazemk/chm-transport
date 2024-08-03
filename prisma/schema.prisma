@@ -32,12 +32,12 @@ model Driver {
 model Vehicle {
   id                 String       @id @default(uuid())
   vehicleName        String // اسم خودرو
-  year               Int
+  year               Int?
   licensePlate       String // پلاک
   insuranceDate      DateTime? // تاریخ بیمه
   insuranceNo        String // شماره بیمه
   technicalCheckDate DateTime? // تاریخ معاینه فنی
-  ChdNo              Int // کد خودرو
+  ChdNo              Int? // کد خودرو
   Connetion          Connection[]
   createdAt          DateTime     @default(now())
 }

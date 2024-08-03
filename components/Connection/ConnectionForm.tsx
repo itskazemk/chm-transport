@@ -33,16 +33,16 @@ const formDefaultValues = {
   routeId: "0",
 };
 
-const SubmitBtn = ({ editMode, resetForm }: any) => {
+const SubmitBtn = ({ editMode /* resetForm */ }: any) => {
   const { pending } = useFormStatus();
   return (
     <div className="grid grid-cols-4 gap-2">
-      <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-3`} disabled={pending}>
+      <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-4`} disabled={pending}>
         {pending ? "..." : editMode ? "ویرایش" : "ثبت ارتباط جدید"}
       </button>
-      <button type="button" className="btn col-span-1" onClick={resetForm}>
+      {/* <button type="button" className="btn col-span-1" onClick={resetForm}>
         <PencilOff />
-      </button>
+      </button> */}
     </div>
   );
 };
@@ -100,10 +100,10 @@ function ConnectionForm({
     formAction(formData);
   };
 
-  function resetForm() {
-    form.reset(formDefaultValues);
-    setCurrentConnection(null);
-  }
+  // function resetForm() {
+  //   form.reset(formDefaultValues);
+  //   setCurrentConnection(null);
+  // }
 
   return (
     <>
@@ -212,7 +212,7 @@ function ConnectionForm({
         </div>
 
         <div className="mt-5">
-          <SubmitBtn editMode={!!connection} resetForm={resetForm} />
+          <SubmitBtn editMode={!!connection} /* resetForm={resetForm} */ />
         </div>
       </form>
     </>

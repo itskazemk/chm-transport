@@ -79,7 +79,7 @@ export const routeSchema = z.object({
 
 export const vehicleSchema = z.object({
   vehicleName: z.string().trim().min(1),
-  year: z.coerce.number().min(1),
+  year: z.coerce.number().min(1).nullable().optional(),
   insuranceDate: z
     // .coerce
     .union([z.coerce.date(), z.string()])
@@ -103,7 +103,7 @@ export const vehicleSchema = z.object({
     .nullable()
     .optional()
     .default(null), //date
-  ChdNo: z.coerce.number().min(1),
+  ChdNo: z.coerce.number().min(1).nullable().optional(),
   licensePlate: z.string().trim().min(1),
 });
 

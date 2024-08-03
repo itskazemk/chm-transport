@@ -33,16 +33,16 @@ const formDefaultValues = {
   sex: 1,
 };
 
-const SubmitBtn = ({ editMode, resetForm }: any) => {
+const SubmitBtn = ({ editMode /* resetForm */ }: any) => {
   const { pending } = useFormStatus();
   return (
     <div className="grid grid-cols-4 gap-2">
-      <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-3`} disabled={pending}>
-        {pending ? "..." : editMode ? "ویرایش" : "ثبت مسیر جدید"}
+      <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-4`} disabled={pending}>
+        {pending ? "..." : editMode ? "ویرایش" : "ثبت راننده جدید"}
       </button>
-      <button type="button" className="btn col-span-1" onClick={resetForm}>
+      {/* <button type="button" className="btn col-span-1" onClick={resetForm}>
         <PencilOff />
-      </button>
+      </button> */}
     </div>
   );
 };
@@ -89,10 +89,10 @@ function DriverForm({ driver, onSave, setCurrentDriver }: DriverFormProps) {
     formAction(formData);
   };
 
-  function resetForm() {
-    form.reset(formDefaultValues);
-    setCurrentDriver(null);
-  }
+  // function resetForm() {
+  //   form.reset(formDefaultValues);
+  //   setCurrentDriver(null);
+  // }
 
   return (
     <>
@@ -187,14 +187,14 @@ function DriverForm({ driver, onSave, setCurrentDriver }: DriverFormProps) {
               <option value="5">فوق لیسانس</option>
             </select>
           </label>
-          <label className="form-control w-full max-w-xs">
+          <label className="form-control hidden w-full max-w-xs">
             <div className="label">
               <span className="label-text">جنسیت</span>
             </div>
             <select
               {...form.register("sex", { valueAsNumber: true })}
               className="select select-bordered w-full max-w-xs"
-              defaultValue={1}
+              defaultValue={2}
             >
               <option value="1">انتخاب کنید</option>
               <option value="2">مرد</option>
@@ -204,7 +204,7 @@ function DriverForm({ driver, onSave, setCurrentDriver }: DriverFormProps) {
         </div>
 
         <div className="mt-5">
-          <SubmitBtn editMode={!!driver} resetForm={resetForm} />
+          <SubmitBtn editMode={!!driver} /* resetForm={resetForm} */ />
         </div>
       </form>
     </>

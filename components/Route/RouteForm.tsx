@@ -23,16 +23,16 @@ interface FormState {
 
 const formDefaultValues = { path: "", stations: "" };
 
-const SubmitBtn = ({ editMode, resetForm }: any) => {
+const SubmitBtn = ({ editMode /* resetForm */ }: any) => {
   const { pending } = useFormStatus();
   return (
     <div className="grid grid-cols-4 gap-2">
-      <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-3`} disabled={pending}>
+      <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-4`} disabled={pending}>
         {pending ? "..." : editMode ? "ویرایش" : "ثبت مسیر جدید"}
       </button>
-      <button type="button" className="btn col-span-1" onClick={resetForm}>
+      {/* <button type="button" className="btn col-span-1" onClick={resetForm}>
         <PencilOff />
-      </button>
+      </button> */}
     </div>
   );
 };
@@ -80,10 +80,10 @@ function RouteForm({ route, onSave, setCurrentRoute }: RouteFormProps) {
     formAction(formData);
   };
 
-  function resetForm() {
-    form.reset(formDefaultValues);
-    setCurrentRoute(null);
-  }
+  // function resetForm() {
+  //   form.reset(formDefaultValues);
+  //   setCurrentRoute(null);
+  // }
 
   return (
     <>
@@ -134,7 +134,7 @@ function RouteForm({ route, onSave, setCurrentRoute }: RouteFormProps) {
         {/* </div> */}
 
         <div className="mt-5">
-          <SubmitBtn editMode={!!route} resetForm={resetForm} />
+          <SubmitBtn editMode={!!route} /* resetForm={resetForm} */ />
         </div>
       </form>
     </>
