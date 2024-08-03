@@ -34,7 +34,6 @@ export async function getAllDrivers() {
 }
 
 export async function createDriver(prevState: any, data: FormData) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
   const formData = Object.fromEntries(data);
   const parsed = driverSchema.safeParse(formData);
   if (!parsed.success) {

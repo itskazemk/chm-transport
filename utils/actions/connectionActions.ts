@@ -18,7 +18,6 @@ export async function getAllConnections() {
 }
 
 export async function createConnection(prevState: any, data: FormData) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
   const formData = Object.fromEntries(data);
   const parsed = connectionSchema.safeParse(formData);
   if (!parsed.success) {

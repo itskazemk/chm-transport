@@ -10,7 +10,7 @@ export async function getAllRoutes() {
 }
 
 export async function createRoute(prevState: any, data: FormData) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  
   const formData = Object.fromEntries(data);
   const parsed = routeSchema.safeParse(formData);
   if (!parsed.success) {

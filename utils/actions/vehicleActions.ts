@@ -10,7 +10,6 @@ export async function getAllVehicles() {
 }
 
 export async function createVehicle(prevState: any, data: FormData) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
   const formData = Object.fromEntries(data);
   const parsed = vehicleSchema.safeParse(formData);
   if (!parsed.success) {
