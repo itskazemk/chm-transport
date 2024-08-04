@@ -5,7 +5,7 @@ import { getAllRoutes } from "@/utils/actions/routeActions";
 import { getAllVehicles } from "@/utils/actions/vehicleActions";
 import { ConnectionWithIncludes } from "@/utils/zodSchemas";
 
-export const dynamic = 'force-dynamic'
+// export const dynamic = 'force-dynamic'
 
 async function ConnectionPage() {
   const connections: ConnectionWithIncludes[] = await getAllConnections();

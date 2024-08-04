@@ -1,7 +1,7 @@
 import DriverWrapper from "@/components/Driver/DriverWrapper";
 import { getAllDrivers } from "@/utils/actions/driverActions";
 
-export const dynamic = 'force-dynamic'
+// export const dynamic = 'force-dynamic'
 
 async function DriversPage() {
   const drivers = await getAllDrivers();
