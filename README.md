@@ -37,3 +37,17 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - [ ] improve license plate input UI
 - [ ] change tab title in different urls
 - [ ] improve navbar's links to be highlighted when opening url
+
+# Environment variables declared in this file are automatically made available to Prisma.
+
+# See the documentation for more detail: https://pris.ly/d/prisma-schema#accessing-environment-variables-from-the-schema
+
+# Prisma supports the native connection string format for PostgreSQL, MySQL, SQLite, SQL Server, MongoDB and CockroachDB.
+
+# See the documentation for all the connection string options: https://pris.ly/d/connection-strings
+
+DATABASE_URL=postgresql://chd_transport_user:rZUCARy2gDxPShfptHcK39utTcINtkCd@dpg-cqnrtjo8fa8c73atikog-a.oregon-postgres.render.com/chd_transport
+
+# DATABASE_URL="file:./dev.db"
+
+# DATABASE_URL="postgresql://postgres:1@localhost:5433/testdb?schema=public"
