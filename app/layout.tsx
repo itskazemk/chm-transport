@@ -6,7 +6,8 @@ import Footer from "@/components/Footer";
 import localFont from "next/font/local";
 import "@mantine/core/styles.css"; // doesn't work with font
 
-import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import { ColorSchemeScript } from "@mantine/core";
+import Providers from "./provider";
 
 export const metadata: Metadata = {
   title: "ایاب و ذهاب",
@@ -36,7 +37,7 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body className="flex min-h-screen flex-col">
-        <MantineProvider theme={{ fontFamily: "Vazirmatn" }}>
+        <Providers>
           <div className="flex-grow">
             <div className="drawer">
               <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -94,7 +95,7 @@ export default function RootLayout({
             </div>
           </div>
           <Footer />
-        </MantineProvider>
+        </Providers>
       </body>
     </html>
   );

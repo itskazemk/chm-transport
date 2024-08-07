@@ -96,9 +96,6 @@ function DriverForm({ driver, onSave, setCurrentDriver }: DriverFormProps) {
 
   return (
     <>
-      <div>
-        <Toaster />
-      </div>
       {state?.message && <div>{state.message}</div>}
       <div className="mb-2 flex gap-2 rounded bg-base-200 p-3">
         <SquarePlus className="text-primary" />
