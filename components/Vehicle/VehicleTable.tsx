@@ -49,50 +49,45 @@ function VehicleTable({ vehicles, onEditClick }: VehicleTableProps) {
   //   const [editState, editAction] = useFormState(createDriver, initialState);
 
   return (
-    <div>
-      <div>
-        <Toaster />
-      </div>
-      <div className="overflow-x-auto">
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr>
-              <th></th>
-              <th>نوع</th>
-              <th>مدل</th>
-              <th>پلاک</th>
-              <th>شماره بیمه</th>
-              <th>تاریخ بیمه</th>
-              <th>کد خودرو</th>
-              <th>تاریخ معاینه فنی</th>
+    <div className="overflow-x-auto">
+      <table className="table">
+        {/* head */}
+        <thead>
+          <tr>
+            <th></th>
+            <th>نوع</th>
+            <th>مدل</th>
+            <th>پلاک</th>
+            <th>شماره بیمه</th>
+            <th>تاریخ بیمه</th>
+            <th>کد خودرو</th>
+            <th>تاریخ معاینه فنی</th>
+          </tr>
+        </thead>
+        {/* <tbody>{content}</tbody> */}
+        <tbody>
+          {vehicles.map((vehicle, index) => (
+            <tr key={vehicle.id}>
+              <th>{index + 1}</th>
+              <td>{vehicle.vehicleName}</td>
+              <td>{vehicle.year}</td>
+              <td>{vehicle.licensePlate}</td>
+              <td>{vehicle.insuranceNo}</td>
+              {/* تبدیل تاریخ به شمسی */}
+              <td>{vehicle.insuranceDate?.toLocaleDateString("fa-ir")}</td>
+              <td>{vehicle.ChdNo}</td>
+              {/* تبدیل تاریخ به شمسی */}
+              <td>{vehicle.technicalCheckDate?.toLocaleDateString("fa-ir")}</td>
+              <td>
+                <Trash2 className="cursor-pointer hover:text-red-500" onClick={() => handleDelete(vehicle.id)} />
+              </td>
+              <td>
+                <Pencil className="cursor-pointer hover:text-yellow-600" onClick={() => onEditClick(vehicle)} />
+              </td>
             </tr>
-          </thead>
-          {/* <tbody>{content}</tbody> */}
-          <tbody>
-            {vehicles.map((vehicle, index) => (
-              <tr key={vehicle.id}>
-                <th>{index + 1}</th>
-                <td>{vehicle.vehicleName}</td>
-                <td>{vehicle.year}</td>
-                <td>{vehicle.licensePlate}</td>
-                <td>{vehicle.insuranceNo}</td>
-                {/* تبدیل تاریخ به شمسی */}
-                <td>{vehicle.insuranceDate?.toLocaleDateString("fa-ir")}</td>
-                <td>{vehicle.ChdNo}</td>
-                {/* تبدیل تاریخ به شمسی */}
-                <td>{vehicle.technicalCheckDate?.toLocaleDateString("fa-ir")}</td>
-                <td>
-                  <Trash2 className="cursor-pointer hover:text-red-500" onClick={() => handleDelete(vehicle.id)} />
-                </td>
-                <td>
-                  <Pencil className="cursor-pointer hover:text-yellow-600" onClick={() => onEditClick(vehicle)} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

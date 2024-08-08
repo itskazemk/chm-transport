@@ -49,38 +49,33 @@ function RouteTable({ routes, onEditClick }: RouteTableProps) {
   //   const [editState, editAction] = useFormState(createDriver, initialState);
 
   return (
-    <div>
-      <div>
-        <Toaster />
-      </div>
-      <div className="overflow-x-auto">
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr>
-              <th></th>
-              <th>مسیر</th>
-              <th>ایستگاه ها</th>
+    <div className="overflow-x-auto">
+      <table className="table">
+        {/* head */}
+        <thead>
+          <tr>
+            <th></th>
+            <th>مسیر</th>
+            <th>ایستگاه ها</th>
+          </tr>
+        </thead>
+        {/* <tbody>{content}</tbody> */}
+        <tbody>
+          {routes.map((route, index) => (
+            <tr key={route.id}>
+              <th>{index + 1}</th>
+              <td>{route.path}</td>
+              <td>{route.stations}</td>
+              <td>
+                <Trash2 className="cursor-pointer hover:text-red-500" onClick={() => handleDelete(route.id)} />
+              </td>
+              <td>
+                <Pencil className="cursor-pointer hover:text-yellow-600" onClick={() => onEditClick(route)} />
+              </td>
             </tr>
-          </thead>
-          {/* <tbody>{content}</tbody> */}
-          <tbody>
-            {routes.map((route, index) => (
-              <tr key={route.id}>
-                <th>{index + 1}</th>
-                <td>{route.path}</td>
-                <td>{route.stations}</td>
-                <td>
-                  <Trash2 className="cursor-pointer hover:text-red-500" onClick={() => handleDelete(route.id)} />
-                </td>
-                <td>
-                  <Pencil className="cursor-pointer hover:text-yellow-600" onClick={() => onEditClick(route)} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

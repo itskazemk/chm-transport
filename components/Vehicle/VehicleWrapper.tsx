@@ -3,6 +3,8 @@ import { Vehicle } from "@prisma/client";
 import { useState } from "react";
 import VehicleTable from "./VehicleTable";
 import VehicleForm from "./VehicleForm";
+import { useQuery } from "@tanstack/react-query";
+import { getAllVehicles } from "@/utils/actions/vehicleActions";
 
 interface ClientWrapperProps {
   initialVehicles: Vehicle[];
@@ -24,6 +26,14 @@ function VehicleWrapper({ initialVehicles }: ClientWrapperProps) {
       setCurrentVehicle(null);
     }
   };
+
+  //---------------
+  const { data, isPending } = useQuery({
+    queryKey: ["vehicles"],
+    queryFn: getAllVehicles,
+  });
+
+  console.log(696969, data);
 
   return (
     <div className="p-2 sm:p-4">

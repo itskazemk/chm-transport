@@ -65,48 +65,43 @@ function DriverTable({ drivers, onEditClick }: DriverTableProps) {
   //   const [editState, editAction] = useFormState(createDriver, initialState);
 
   return (
-    <div>
-      <div>
-        <Toaster />
-      </div>
-      <div className="overflow-x-auto">
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr>
-              <th></th>
-              <th>نام</th>
-              <th>نام خانوادگی</th>
-              <th>کدملی</th>
-              <th>شماره موبایل</th>
-              <th>شماره حساب</th>
-              <th>خدمت سربازی</th>
-              <th>مدرک تحصیلی</th>
+    <div className="overflow-x-auto">
+      <table className="table">
+        {/* head */}
+        <thead>
+          <tr>
+            <th></th>
+            <th>نام</th>
+            <th>نام خانوادگی</th>
+            <th>کدملی</th>
+            <th>شماره موبایل</th>
+            <th>شماره حساب</th>
+            <th>خدمت سربازی</th>
+            <th>مدرک تحصیلی</th>
+          </tr>
+        </thead>
+        {/* <tbody>{content}</tbody> */}
+        <tbody>
+          {drivers.map((driver, index) => (
+            <tr key={driver.id}>
+              <th>{index + 1}</th>
+              <td>{driver.firstName}</td>
+              <td>{driver.lastName}</td>
+              <td>{driver.nationalId}</td>
+              <td>{driver.phoneNumber}</td>
+              <td>{driver.bankAccount}</td>
+              <td>{MilitaryServiceEnum[driver.militaryService]}</td>
+              <td>{DegreeEnum[driver.degree]}</td>
+              <td>
+                <Trash2 className="cursor-pointer hover:text-red-500" onClick={() => handleDelete(driver.id)} />
+              </td>
+              <td>
+                <Pencil className="cursor-pointer hover:text-yellow-600" onClick={() => onEditClick(driver)} />
+              </td>
             </tr>
-          </thead>
-          {/* <tbody>{content}</tbody> */}
-          <tbody>
-            {drivers.map((driver, index) => (
-              <tr key={driver.id}>
-                <th>{index + 1}</th>
-                <td>{driver.firstName}</td>
-                <td>{driver.lastName}</td>
-                <td>{driver.nationalId}</td>
-                <td>{driver.phoneNumber}</td>
-                <td>{driver.bankAccount}</td>
-                <td>{MilitaryServiceEnum[driver.militaryService]}</td>
-                <td>{DegreeEnum[driver.degree]}</td>
-                <td>
-                  <Trash2 className="cursor-pointer hover:text-red-500" onClick={() => handleDelete(driver.id)} />
-                </td>
-                <td>
-                  <Pencil className="cursor-pointer hover:text-yellow-600" onClick={() => onEditClick(driver)} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
