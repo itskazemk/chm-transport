@@ -32,11 +32,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODOs
 
-- [ ] when submitting new record in forms, success notif is not working
+- [ ] add useActionState instead of useFormState and useFormStatus
+- [ ] add loading.tsx
 - [ ] select options with search feature
 - [ ] improve license plate input UI
 - [ ] change tab title in different urls
 - [ ] improve navbar's links to be highlighted when opening url
+- [ ] when submitting new record in forms, success notif is not working
 
 # Environment variables declared in this file are automatically made available to Prisma.
 
@@ -46,7 +48,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 # See the documentation for all the connection string options: https://pris.ly/d/connection-strings
 
-DATABASE_URL=postgresql://chd_transport_user:rZUCARy2gDxPShfptHcK39utTcINtkCd@dpg-cqnrtjo8fa8c73atikog-a.oregon-postgres.render.com/chd_transport
+# DATABASE_URL=postgresql://chd_transport_user:rZUCARy2gDxPShfptHcK39utTcINtkCd@dpg-cqnrtjo8fa8c73atikog-a.oregon-postgres.render.com/chd_transport
 
 # DATABASE_URL="file:./dev.db"
 
