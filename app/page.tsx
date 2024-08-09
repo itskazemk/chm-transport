@@ -1,5 +1,11 @@
-import Image from "next/image";
+import { auth } from "@/auth";
 
-export default function Home() {
-  return <div>نمایش موعد سرویس روغن ماشین هایی که نزدیک است و یا بقیه چیز های اماری</div>;
+export default async function Home() {
+  const session = await auth();
+  return (
+    <div>
+      <h2>آمار</h2>
+      <pre style={{ direction: "ltr" }}>{JSON.stringify(session, null, 2)}</pre>
+    </div>
+  );
 }
