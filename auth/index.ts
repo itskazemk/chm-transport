@@ -4,6 +4,7 @@ import Credentials from "next-auth/providers/credentials";
 export const BASE_PATH = "/api/auth";
 
 const authOptions: NextAuthConfig = {
+  // pages: { signIn: "/login" },
   providers: [
     Credentials({
       name: "Credentials",
