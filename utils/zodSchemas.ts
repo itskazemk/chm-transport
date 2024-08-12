@@ -115,3 +115,9 @@ export const connectionSchema = z.object({
   vehicleId: z.string().trim().min(2),
   routeId: z.string().trim().min(2),
 });
+
+export const SignupFormSchema = z.object({
+  name: z.string().trim().min(3),
+  userName: z.string().trim().min(3),
+  password: z.string().trim().min(3),
+});
