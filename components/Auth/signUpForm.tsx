@@ -16,7 +16,7 @@ export function SignUpForm() {
             <span className="label-text">Name</span>
           </div>
           <input id="name" name="name" placeholder="John Doe" className="input input-bordered w-full max-w-xs" />
-          {/* {state?.errors?.name && <p className="text-sm text-red-500">{state.errors.name}</p>} */}
+          {state?.errors?.name && <p className="text-sm text-red-500">{state.errors.name}</p>}
         </label>
 
         <label htmlFor="userName" className="form-control w-full max-w-xs">
@@ -24,7 +24,7 @@ export function SignUpForm() {
             <span className="label-text">Username</span>
           </div>
           <input id="userName" name="userName" className="input input-bordered w-full max-w-xs" />
-          {/* {state?.errors?.userName && <p className="text-sm text-red-500">{state.errors.userName}</p>} */}
+          {state?.errors?.userName && <p className="text-sm text-red-500">{state.errors.userName}</p>}
         </label>
 
         <label htmlFor="password" className="form-control w-full max-w-xs">
@@ -32,7 +32,7 @@ export function SignUpForm() {
             <span className="label-text">Password</span>
           </div>
           <input id="password" name="password" type="password" className="input input-bordered w-full max-w-xs" />
-          {/* {state?.errors?.password && (
+          {state?.errors?.password && (
             <div className="text-sm text-red-500">
               <p>Password must:</p>
               <ul>
@@ -41,7 +41,7 @@ export function SignUpForm() {
                 ))}
               </ul>
             </div>
-          )} */}
+          )}
         </label>
 
         <SignUpButton />
