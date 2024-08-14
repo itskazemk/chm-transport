@@ -1,13 +1,15 @@
 "use client";
 
-import { signUp } from "@/utils/actions/authActions";
+import { signUpAction } from "@/utils/actions/authActions";
 import { useFormState, useFormStatus } from "react-dom";
+// import { useFormState, useFormStatus } from "react-dom";
 
 export function SignUpForm() {
-  const [state, action] = useFormState(signUp, undefined);
+  // const [state, formAction, pending] = useActionState(signUpAction, undefined);
+  const [state, formAction] = useFormState(signUpAction, undefined);
 
   return (
-    <form action={action} className="">
+    <form action={formAction} className="">
       <div className="flex flex-col gap-2">
         <label htmlFor="name" className="form-control w-full max-w-xs">
           <div className="label">

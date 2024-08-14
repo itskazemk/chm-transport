@@ -2,14 +2,15 @@
 
 import { SignupFormSchema } from "../zodSchemas";
 
-export async function signUp(state: any, data: FormData) {
+export async function signUpAction(state: any, data: FormData) {
   console.log(1111, data);
   // 1. Validate fields
   const formData = Object.fromEntries(data);
   const parsed = SignupFormSchema.safeParse(formData);
   if (!parsed.success) {
-    return { errors: parsed.error };
+    return { errors: parsed.error, status: "failed" };
   }
+  return { status: "success" };
 
   // 2. Create user
   // 3. Create session
