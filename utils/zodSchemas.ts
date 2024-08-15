@@ -47,6 +47,14 @@ export interface ConnectionWithIncludes {
   createdAt: Date;
 }
 
+export interface Session {
+  userId: string;
+  name: string;
+  username: string;
+  role: number;
+  expiresAt: Date;
+}
+
 export enum CompanyEnum {
   "انتخاب نشده" = 1,
   "پامیدکو",
@@ -57,6 +65,12 @@ export enum ShiftTypeEnum {
   "انتخاب نشده" = 1,
   "روزکار" = 2,
   "شیفت" = 3,
+}
+
+export enum UserRoleTypeEnum {
+  admin = 1,
+  type2 = 2,
+  type3 = 3,
 }
 
 export const driverSchema = z.object({
@@ -119,5 +133,11 @@ export const connectionSchema = z.object({
 export const SignupFormSchema = z.object({
   name: z.string().trim().min(3),
   userName: z.string().trim().min(3),
+  role: z.coerce.number(),
+  password: z.string().trim().min(3),
+});
+
+export const SignInFormSchema = z.object({
+  username: z.string().trim().min(3),
   password: z.string().trim().min(3),
 });

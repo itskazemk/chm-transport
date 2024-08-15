@@ -5,6 +5,7 @@ import "server-only";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { User } from "@prisma/client";
 
 const secretKey = process.env.AUTH_SECRET;
 const key = new TextEncoder().encode(secretKey);
@@ -24,10 +25,16 @@ export async function decrypt(session: string | undefined = "") {
   }
 }
 
-export async function createSession(userId: string) {
+export async function createSession(user: User) {
   const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
   // add name, username, role
-  const session = await encrypt({ userId, expiresAt });
+  const session = await encrypt({
+    userId: user.id,
+    username: user.userName,
+    name: user.name,
+    role: user.role,
+    expiresAt,
+  });
 
   cookies().set("session", session, {
     httpOnly: true,
@@ -43,13 +50,12 @@ export async function createSession(userId: string) {
 export async function verifySession() {
   const cookie = cookies().get("session")?.value;
   const session = await decrypt(cookie);
-  console.log(69696, session);
 
   if (!session?.userId) {
     redirect("/login");
   }
 
-  return { isAuth: true, userId: session.userId };
+  return { isAuth: true, userId: session.userId, username: session.username, name: session.name, role: session.role };
 }
 
 export async function updateSession() {

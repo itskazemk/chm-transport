@@ -27,6 +27,14 @@ export function SignUpForm() {
           {state?.errors?.userName && <p className="text-sm text-red-500">{state.errors.userName}</p>}
         </label>
 
+        <label htmlFor="role" className="form-control w-full max-w-xs">
+          <div className="label">
+            <span className="label-text">role</span>
+          </div>
+          <input id="role" name="role" className="input input-bordered w-full max-w-xs" />
+          {state?.errors?.role && <p className="text-sm text-red-500">{state.errors.role}</p>}
+        </label>
+
         <label htmlFor="password" className="form-control w-full max-w-xs">
           <div className="label">
             <span className="label-text">Password</span>

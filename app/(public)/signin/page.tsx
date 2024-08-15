@@ -1,5 +1,11 @@
+import { SignInForm } from "@/components/Auth/signInForm";
+
 function signIn() {
-  return <div>signIn</div>;
+  return (
+    <div className="flex justify-center">
+      <SignInForm />
+    </div>
+  );
 }
 
 export default signIn;
