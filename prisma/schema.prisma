@@ -70,13 +70,13 @@ model Connection {
 }
 
 model User {
-  id       String     @id @default(uuid())
-  name     String
-  userName String     @unique
-  password String
-  // role
-  //createdAt
-  Sessions Sessions[]
+  id        String     @id @default(uuid())
+  name      String
+  userName  String     @unique
+  password  String
+  role      Int
+  Sessions  Sessions[]
+  createdAt DateTime   @default(now())
 }
 
 model Sessions {
