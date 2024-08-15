@@ -1,7 +1,9 @@
 "use server";
 
 const bcrypt = require("bcrypt");
-import { SignupFormSchema } from "../zodSchemas";
+import db from "@/utils/db";
+import { SignupFormSchema } from "@/utils/zodSchemas";
+import { createSession } from "@/utils/session";
 
 export async function signUpAction(state: any, data: FormData) {
   console.log(1111, data);
@@ -18,5 +20,9 @@ export async function signUpAction(state: any, data: FormData) {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
+  const user = await db.user.create({ data: { name, userName, password: hashedPassword } });
+
   // 3. Create session
+  // TODO add name, username, role
+  await createSession(user.id);
 }

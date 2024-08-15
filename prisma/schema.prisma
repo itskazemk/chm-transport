@@ -74,6 +74,8 @@ model User {
   name     String
   userName String     @unique
   password String
+  // role
+  //createdAt
   Sessions Sessions[]
 }
 

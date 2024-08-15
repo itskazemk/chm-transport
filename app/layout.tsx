@@ -20,10 +20,10 @@ const myFont = localFont({
 });
 
 const navLinks = [
-  { label: "خودروها", href: "/vehicles", icon: <Bus /> },
-  { label: "رانندگان", href: "/drivers", icon: <UserRound /> },
-  { label: "مسیرها", href: "/routes", icon: <TrafficCone /> },
-  { label: "؟؟؟ارتباط", href: "/connections", icon: <Cable /> },
+  { label: "خودروها", href: "/dashboard/vehicles", icon: <Bus /> },
+  { label: "رانندگان", href: "/dashboard/drivers", icon: <UserRound /> },
+  { label: "مسیرها", href: "/dashboard/routes", icon: <TrafficCone /> },
+  { label: "؟؟؟ارتباط", href: "/dashboard/connections", icon: <Cable /> },
 ];
 
 export default function RootLayout({
