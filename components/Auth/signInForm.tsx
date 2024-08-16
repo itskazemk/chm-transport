@@ -15,7 +15,7 @@ export function SignInForm() {
         <div className="flex flex-col gap-2">
           <label htmlFor="username" className="form-control w-full max-w-xs">
             <div className="label">
-              <span className="label-text">username</span>
+              <span className="label-text">نام کاربری</span>
             </div>
             <input id="username" name="username" className="input input-bordered w-full max-w-xs" />
             {state?.errors?.username && <p className="text-sm text-red-500">{state.errors.username}</p>}
@@ -23,7 +23,7 @@ export function SignInForm() {
 
           <label htmlFor="password" className="form-control w-full max-w-xs">
             <div className="label">
-              <span className="label-text">Password</span>
+              <span className="label-text">رمز عبور</span>
             </div>
             <input id="password" name="password" type="password" className="input input-bordered w-full max-w-xs" />
             {state?.errors?.password && <p className="text-sm text-red-500">{state.errors.password}</p>}
