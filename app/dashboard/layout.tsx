@@ -5,7 +5,7 @@ const navLinks = [
   { label: "خودروها", href: "/dashboard/vehicles", icon: <Bus /> },
   { label: "رانندگان", href: "/dashboard/drivers", icon: <UserRound /> },
   { label: "مسیرها", href: "/dashboard/routes", icon: <TrafficCone /> },
-  { label: "؟؟؟ارتباط", href: "/dashboard/connections", icon: <Cable /> },
+  { label: "ارتباط", href: "/dashboard/connections", icon: <Cable /> },
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -29,7 +29,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               </label>
             </div>
             <div className="mx-2 flex-1 px-2">
-              <Link href="/">ایاب و ذهاب</Link>
+              <Link href="/dashboard">ایاب و ذهاب</Link>
             </div>
             <div className="hidden flex-none lg:block">
               <ul className="menu menu-horizontal">
