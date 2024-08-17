@@ -58,6 +58,7 @@ interface SelectOptionInterface {
   className?: string;
   placeholder?: string;
   searchable?: boolean;
+  // defaultValue?: string;
 }
 
 export function SelectOption({
@@ -76,7 +77,8 @@ export function SelectOption({
         <Select
           onChange={onChange} // send value to hook form
           onBlur={onBlur} // notify when input is touched/blur
-          value={value}
+          value={value !== null ? value.toString() : null}
+          // value={value}
           // ---------------------------- SAME FOR ALL CONTROLLED INPUTS
           className={className}
           placeholder={placeholder}
