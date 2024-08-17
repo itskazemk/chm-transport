@@ -2,6 +2,8 @@
 
 import { signUpAction } from "@/utils/actions/authActions";
 import { useFormState, useFormStatus } from "react-dom";
+import { SelectOption } from "../SimpleInputs";
+import { Select } from "@mantine/core";
 // import { useFormState, useFormStatus } from "react-dom";
 
 export function SignUpForm() {
@@ -15,7 +17,12 @@ export function SignUpForm() {
           <div className="label">
             <span className="label-text">Name</span>
           </div>
-          <input id="name" name="name" placeholder="John Doe" className="input input-bordered w-full max-w-xs" />
+          <input
+            id="name"
+            name="name"
+            placeholder="John Doe"
+            className="input input-bordered w-full max-w-xs"
+          />
           {state?.errors?.name && <p className="text-sm text-red-500">{state.errors.name}</p>}
         </label>
 
@@ -31,7 +38,16 @@ export function SignUpForm() {
           <div className="label">
             <span className="label-text">role</span>
           </div>
-          <input id="role" name="role" className="input input-bordered w-full max-w-xs" />
+          <Select
+            name="role"
+            data={[
+              { value: "1", label: "Super Admin" },
+              { value: "2", label: "user 2" },
+              { value: "#", label: "user 3" },
+            ]}
+          />
+
+          {/* <input id="role" name="role" className="input input-bordered w-full max-w-xs" /> */}
           {state?.errors?.role && <p className="text-sm text-red-500">{state.errors.role}</p>}
         </label>
 
@@ -39,7 +55,12 @@ export function SignUpForm() {
           <div className="label">
             <span className="label-text">Password</span>
           </div>
-          <input id="password" name="password" type="password" className="input input-bordered w-full max-w-xs" />
+          <input
+            id="password"
+            name="password"
+            type="password"
+            className="input input-bordered w-full max-w-xs"
+          />
           {state?.errors?.password && (
             <div className="text-sm text-red-500">
               <p>Password must:</p>
