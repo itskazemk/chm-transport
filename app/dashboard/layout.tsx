@@ -1,3 +1,5 @@
+import Avatar from "@/components/Avatar";
+import { verifySession } from "@/utils/session";
 import { Bus, Cable, TrafficCone, UserRound } from "lucide-react";
 import Link from "next/link";
 
@@ -8,7 +10,9 @@ const navLinks = [
   { label: "ارتباط", href: "/dashboard/connections", icon: <Cable /> },
 ];
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const user = await verifySession();
+
   return (
     <div className="flex-grow">
       <div className="drawer">
@@ -30,6 +34,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </div>
             <div className="mx-2 flex-1 px-2">
               <Link href="/dashboard">ایاب و ذهاب</Link>
+              <div className="mr-4">
+                <Avatar user={user} />
+              </div>
             </div>
             <div className="hidden flex-none lg:block">
               <ul className="menu menu-horizontal">

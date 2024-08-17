@@ -1,5 +1,5 @@
-import "server-only";
-// "use server";
+// import "server-only";
+"use server";
 
 // import type { SessionPayload } from '@/app/auth/definitions';
 import { SignJWT, jwtVerify } from "jose";
@@ -76,7 +76,7 @@ export async function updateSession() {
   });
 }
 
-export function deleteSession() {
+export async function deleteSession() {
   cookies().delete("session");
-  redirect("/login");
+  redirect("/signin");
 }

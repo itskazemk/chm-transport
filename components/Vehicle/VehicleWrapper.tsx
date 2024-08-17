@@ -28,12 +28,10 @@ function VehicleWrapper({ initialVehicles }: ClientWrapperProps) {
   };
 
   //---------------
-  const { data, isPending } = useQuery({
-    queryKey: ["vehicles"],
-    queryFn: getAllVehicles,
-  });
-
-  console.log(696969, data);
+  // const { data, isPending } = useQuery({
+  //   queryKey: ["vehicles"],
+  //   queryFn: getAllVehicles,
+  // });
 
   return (
     <div className="p-2 sm:p-4">

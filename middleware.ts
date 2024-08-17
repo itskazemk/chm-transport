@@ -19,7 +19,7 @@ export default async function middleware(req: NextRequest) {
   const cookie = cookies().get("session")?.value;
   const session = await decrypt(cookie);
 
-  console.log(111, req.nextUrl);
+  // console.log(111, req.nextUrl);
 
   // 4. Redirect
   if (isProtectedRoute && !session?.userId) {
