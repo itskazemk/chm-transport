@@ -2,6 +2,7 @@ import Avatar from "@/components/Avatar";
 import { verifySession } from "@/utils/session";
 import { Bus, Cable, TrafficCone, UserRound } from "lucide-react";
 import Link from "next/link";
+import { Workflow } from "lucide-react";
 
 const navLinks = [
   { label: "خودروها", href: "/dashboard/vehicles", icon: <Bus /> },
@@ -33,7 +34,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
               </label>
             </div>
             <div className="mx-2 flex-1 px-2">
-              <Link href="/dashboard">ایاب و ذهاب</Link>
+              <Link href="/dashboard" className="flex gap-2">
+                <Workflow /> ایاب و ذهاب
+              </Link>
               <div className="mr-4">
                 <Avatar user={user} />
               </div>
