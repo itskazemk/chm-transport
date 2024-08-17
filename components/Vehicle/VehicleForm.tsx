@@ -9,7 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { Vehicle } from "@prisma/client";
 import { vehicleSchema } from "@/utils/zodSchemas";
 import { createVehicle, updateVehicle } from "@/utils/actions/vehicleActions";
-import DatePickerInput from "../SimpleInputs";
+import { DatePickerInput } from "../SimpleInputs";
 
 interface VehicleFormProps {
   vehicle?: Vehicle | null;

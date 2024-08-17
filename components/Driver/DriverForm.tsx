@@ -10,6 +10,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { PencilOff, SquarePlus } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { Driver } from "@prisma/client";
+import { Select } from "@mantine/core";
+import { SelectOption } from "../SimpleInputs";
 
 interface DriverFormProps {
   driver?: Driver | null;
@@ -37,7 +39,11 @@ const SubmitBtn = ({ editMode /* resetForm */ }: any) => {
   const { pending } = useFormStatus();
   return (
     <div className="grid grid-cols-4 gap-2">
-      <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-4`} disabled={pending}>
+      <button
+        type="submit"
+        className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-4`}
+        disabled={pending}
+      >
         {pending ? "..." : editMode ? "ویرایش" : "ثبت راننده جدید"}
       </button>
       {/* <button type="button" className="btn col-span-1" onClick={resetForm}>
@@ -58,7 +64,10 @@ function DriverForm({ driver, onSave, setCurrentDriver }: DriverFormProps) {
     defaultValues: formDefaultValues,
   });
 
-  const [state, formAction] = useFormState(driver ? updateDriver.bind(null, driver.id) : createDriver, initialState);
+  const [state, formAction] = useFormState(
+    driver ? updateDriver.bind(null, driver.id) : createDriver,
+    initialState
+  );
 
   useEffect(() => {
     console.log(111, state.message);
@@ -118,14 +127,22 @@ function DriverForm({ driver, onSave, setCurrentDriver }: DriverFormProps) {
             <div className="label">
               <span className="label-text">نام</span>
             </div>
-            <input type="text" {...form.register("firstName")} className="input input-bordered w-full max-w-xs" />
+            <input
+              type="text"
+              {...form.register("firstName")}
+              className="input input-bordered w-full max-w-xs"
+            />
           </label>
 
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">نام خانوادگی</span>
             </div>
-            <input type="text" {...form.register("lastName")} className="input input-bordered w-full max-w-xs" />
+            <input
+              type="text"
+              {...form.register("lastName")}
+              className="input input-bordered w-full max-w-xs"
+            />
           </label>
         </div>
         <div className="grid grid-cols-2 gap-2">
@@ -133,14 +150,22 @@ function DriverForm({ driver, onSave, setCurrentDriver }: DriverFormProps) {
             <div className="label">
               <span className="label-text">کدملی</span>
             </div>
-            <input type="text" {...form.register("nationalId")} className="input input-bordered w-full max-w-xs" />
+            <input
+              type="text"
+              {...form.register("nationalId")}
+              className="input input-bordered w-full max-w-xs"
+            />
           </label>
 
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">شماره موبایل</span>
             </div>
-            <input type="text" {...form.register("phoneNumber")} className="input input-bordered w-full max-w-xs" />
+            <input
+              type="text"
+              {...form.register("phoneNumber")}
+              className="input input-bordered w-full max-w-xs"
+            />
           </label>
         </div>
 
@@ -156,7 +181,18 @@ function DriverForm({ driver, onSave, setCurrentDriver }: DriverFormProps) {
             <div className="label">
               <span className="label-text">خدمت سربازی</span>
             </div>
-            <select
+            <SelectOption
+              control={form.control}
+              name="militaryService"
+              data={[
+                // { value: "1", label: "هیچ کدام" },
+                { value: "2", label: "معافیت" },
+                { value: "3", label: "دارای کارت پایان خدمت" },
+                { value: "4", label: "بدون کارت پایان خدمت" },
+              ]}
+            />
+
+            {/* <select
               {...form.register("militaryService", { valueAsNumber: true })} // تبدیل ورودی که بصورت استریگ است به عدد
               className="select select-bordered w-full max-w-xs"
               defaultValue={1}
@@ -165,7 +201,7 @@ function DriverForm({ driver, onSave, setCurrentDriver }: DriverFormProps) {
               <option value="2">معافیت</option>
               <option value="3">دارای کارت پایان خدمت</option>
               <option value="4">بدون کارت پایان خدمت</option>
-            </select>
+            </select> */}
           </label>
 
           <label className="form-control w-full max-w-xs">
