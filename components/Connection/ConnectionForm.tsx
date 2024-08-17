@@ -9,6 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { Connection, Driver, Route, Vehicle } from "@prisma/client";
 import { connectionSchema } from "@/utils/zodSchemas";
 import { createConnection, updateConnection } from "@/utils/actions/connectionActions";
+import { SelectOption } from "../SimpleInputs";
 
 interface ConnectionFormProps {
   connection?: Connection | null;
@@ -37,7 +38,11 @@ const SubmitBtn = ({ editMode /* resetForm */ }: any) => {
   const { pending } = useFormStatus();
   return (
     <div className="grid grid-cols-4 gap-2">
-      <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-4`} disabled={pending}>
+      <button
+        type="submit"
+        className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-4`}
+        disabled={pending}
+      >
         {pending ? "..." : editMode ? "ویرایش" : "ثبت ارتباط جدید"}
       </button>
       {/* <button type="button" className="btn col-span-1" onClick={resetForm}>
@@ -129,22 +134,45 @@ function ConnectionForm({
             <div className="label">
               <span className="label-text">شرکت</span>
             </div>
-            <select {...form.register("company")} className="select select-bordered w-full max-w-xs">
+
+            <SelectOption
+              control={form.control}
+              name="company"
+              data={[
+                { value: "2", label: "پامیدکو" },
+                { value: "3", label: "چادرملو" },
+              ]}
+            />
+            {/* ----- */}
+
+            {/* <select {...form.register("company")} className="select select-bordered w-full max-w-xs">
               <option value={1}>انتخاب کنید</option>
               <option value={2}>پامیدکو</option>
               <option value={3}>چادرملو</option>
-            </select>
+            </select> */}
           </label>
 
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">شیفت</span>
             </div>
-            <select {...form.register("shiftType")} className="select select-bordered w-full max-w-xs">
+
+            <SelectOption
+              control={form.control}
+              name="shiftType"
+              data={[
+                // { value: "1", label: "معافیت" },
+                { value: "2", label: "عادی" },
+                { value: "3", label: "شیفت" },
+              ]}
+            />
+            {/* ----- */}
+
+            {/* <select {...form.register("shiftType")} className="select select-bordered w-full max-w-xs">
               <option value={1}>انتخاب کنید</option>
               <option value={2}>عادی</option>
               <option value={3}>شیفت</option>
-            </select>
+            </select> */}
           </label>
         </div>
 
@@ -153,28 +181,53 @@ function ConnectionForm({
             <div className="label">
               <span className="label-text">راننده اصلی</span>
             </div>
-            <select {...form.register("primaryDriverId")} className="select select-bordered w-full max-w-xs">
+
+            <SelectOption
+              control={form.control}
+              name="primaryDriverId"
+              searchable={true}
+              data={driversOption.map((driver) => {
+                return { value: driver.id, label: `${driver.firstName}-${driver.lastName}` };
+              })}
+            />
+            {/* ----- */}
+
+            {/* <select {...form.register("primaryDriverId")} className="select select-bordered w-full max-w-xs">
               <option value="0">انتخاب کنید</option>
               {driversOption.map((driver) => (
                 <option key={driver.id} value={driver.id}>
                   {driver.firstName}-{driver.lastName}
                 </option>
               ))}
-            </select>
+            </select> */}
           </label>
 
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">راننده جایگزین</span>
             </div>
-            <select {...form.register("secondaryDriverId")} className="select select-bordered w-full max-w-xs">
+
+            <SelectOption
+              control={form.control}
+              name="secondaryDriverId"
+              searchable={true}
+              data={driversOption.map((driver) => {
+                return { value: driver.id, label: `${driver.firstName}-${driver.lastName}` };
+              })}
+            />
+            {/* ----- */}
+
+            {/* <select
+              {...form.register("secondaryDriverId")}
+              className="select select-bordered w-full max-w-xs"
+            >
               <option value="0">انتخاب کنید</option>
               {driversOption.map((driver) => (
                 <option key={driver.id} value={driver.id}>
                   {driver.firstName}-{driver.lastName}
                 </option>
               ))}
-            </select>
+            </select> */}
           </label>
         </div>
 
@@ -183,28 +236,53 @@ function ConnectionForm({
             <div className="label">
               <span className="label-text">خودرو</span>
             </div>
-            <select {...form.register("vehicleId")} className="select select-bordered w-full max-w-xs">
+
+            <SelectOption
+              control={form.control}
+              name="vehicleId"
+              searchable={true}
+              data={vehiclesOption.map((vehicle) => {
+                return {
+                  value: vehicle.id,
+                  label: `${vehicle.vehicleName}-${vehicle.year}-${vehicle.licensePlate}`,
+                };
+              })}
+            />
+            {/* ----- */}
+
+            {/* <select {...form.register("vehicleId")} className="select select-bordered w-full max-w-xs">
               <option value="0">انتخاب کنید</option>
               {vehiclesOption.map((vehicle) => (
                 <option key={vehicle.id} value={vehicle.id}>
                   {vehicle.vehicleName}-{vehicle.year}-{vehicle.licensePlate}
                 </option>
               ))}
-            </select>
+            </select> */}
           </label>
 
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">مسیر</span>
             </div>
-            <select {...form.register("routeId")} className="select select-bordered w-full max-w-xs">
+
+            <SelectOption
+              control={form.control}
+              name="routeId"
+              searchable={true}
+              data={routesOption.map((route) => {
+                return { value: route.id, label: `${route.path}-${route.stations}` };
+              })}
+            />
+            {/* ----- */}
+
+            {/* <select {...form.register("routeId")} className="select select-bordered w-full max-w-xs">
               <option value="0">انتخاب کنید</option>
               {routesOption.map((route) => (
                 <option key={route.id} value={route.id}>
                   {route.path}-{route.stations}
                 </option>
               ))}
-            </select>
+            </select> */}
           </label>
         </div>
 

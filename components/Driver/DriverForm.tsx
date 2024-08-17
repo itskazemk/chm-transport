@@ -208,7 +208,20 @@ function DriverForm({ driver, onSave, setCurrentDriver }: DriverFormProps) {
             <div className="label">
               <span className="label-text">مدرک تحصیلی</span>
             </div>
-            <select
+
+            <SelectOption
+              control={form.control}
+              name="degree"
+              data={[
+                // { value: "1", label: "هیچ کدام" },
+                { value: "2", label: "زیر دیپلم" },
+                { value: "3", label: "دیپلم" },
+                { value: "4", label: "لیسانس" },
+                { value: "5", label: "فوق لیسانس" },
+              ]}
+            />
+
+            {/* <select
               {...form.register("degree", { valueAsNumber: true })}
               className="select select-bordered w-full max-w-xs"
               defaultValue={1}
@@ -218,7 +231,7 @@ function DriverForm({ driver, onSave, setCurrentDriver }: DriverFormProps) {
               <option value="3">دیپلم</option>
               <option value="4">لیسانس</option>
               <option value="5">فوق لیسانس</option>
-            </select>
+            </select> */}
           </label>
           <label className="form-control hidden w-full max-w-xs">
             <div className="label">
