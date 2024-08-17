@@ -34,11 +34,14 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 - [ ] add useActionState instead of useFormState and useFormStatus
 - [ ] add loading.tsx
-- [ ] select options with search feature
-- [ ] improve license plate input UI
+- [x] select options with search feature
+- [x] improve license plate input UI
 - [ ] change tab title in different urls
 - [ ] improve navbar's links to be highlighted when opening url
 - [ ] when submitting new record in forms, success notif is not working
+- [ ] ثبت پلاک هنوز کار داره
+- [ ] داشبورد با قابلیت نمایش ماشین هایی که بیمه آنها در حال اتمامه
+- [ ] داشبورد مخصوص مدیر که فقط توانایی دیدن و جستجو داشته باشد
 
 # Environment variables declared in this file are automatically made available to Prisma.
 
