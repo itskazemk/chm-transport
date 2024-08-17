@@ -147,19 +147,57 @@ function VehicleForm({ vehicle, onSave, setCurrentVehicle }: VehicleFormProps) {
           </label>
         </div>
 
-        <div className="grid grid-cols-2 gap-2">
-          <label className="form-control w-full max-w-xs">
-            <div>{form.formState?.errors?.licensePlate?.message}</div>
-            <div className="label">
-              <span className="label-text">پلاک</span>
-            </div>
+        {/* <div className="grid grid-cols-1 gap-2"> */}
+        <label className="form-control w-full">
+          {/* <div>{form.formState?.errors?.licensePlate?.message}</div> */}
+          <div className="label">
+            <span className="label-text">پلاک</span>
+          </div>
+          <div className="grid w-full grid-cols-6 gap-2" style={{ direction: "ltr" }}>
+            <input
+              type="number"
+              {...form.register("licensePlateA")}
+              placeholder="23"
+              // name="path"
+              className="input input-bordered col-span-1 max-w-xs"
+            />
             <input
               type="text"
-              {...form.register("licensePlate")}
+              {...form.register("licensePlateB")}
+              placeholder="ب"
               // name="path"
-              className="input input-bordered w-full max-w-xs"
+              className="input input-bordered col-span-1 max-w-xs"
             />
-          </label>
+            <input
+              type="number"
+              {...form.register("licensePlateC")}
+              placeholder="273"
+              // name="path"
+              className="input input-bordered col-span-3 max-w-xs"
+            />
+            <input
+              type="number"
+              {...form.register("licensePlateD")}
+              placeholder="64"
+              // name="path"
+              className="input input-bordered col-span-1 max-w-xs"
+            />
+          </div>
+        </label>
+        {/* </div> */}
+
+        <div className="grid grid-cols-2 gap-2">
+          <div className="form-control w-full max-w-xs">
+            <div>{form.formState?.errors?.insuranceDate?.message}</div>
+            <div className="label">
+              <span className="label-text">تاریخ بیمه</span>
+            </div>
+            <DatePickerInput
+              control={form.control}
+              name="insuranceDate"
+              className="input input-bordered w-full text-center"
+            />
+          </div>
 
           <label className="form-control w-full max-w-xs">
             <div>{form.formState?.errors?.insuranceNo?.message}</div>
@@ -176,14 +214,14 @@ function VehicleForm({ vehicle, onSave, setCurrentVehicle }: VehicleFormProps) {
         </div>
 
         <div className="grid grid-cols-2 gap-2">
-          <div className="form-control w-full max-w-xs">
-            <div>{form.formState?.errors?.insuranceDate?.message}</div>
+          <div className="form-control w-full">
+            <div>{form.formState?.errors?.technicalCheckDate?.message}</div>
             <div className="label">
-              <span className="label-text">تاریخ بیمه</span>
+              <span className="label-text">تاریخ معاینه فنی</span>
             </div>
             <DatePickerInput
               control={form.control}
-              name="insuranceDate"
+              name="technicalCheckDate"
               className="input input-bordered w-full text-center"
             />
           </div>
@@ -202,19 +240,6 @@ function VehicleForm({ vehicle, onSave, setCurrentVehicle }: VehicleFormProps) {
           </label>
         </div>
 
-        {/* <div className="grid grid-cols-2 gap-2"> */}
-        <div className="form-control w-full">
-          <div>{form.formState?.errors?.technicalCheckDate?.message}</div>
-          <div className="label">
-            <span className="label-text">تاریخ معاینه فنی</span>
-          </div>
-          <DatePickerInput
-            control={form.control}
-            name="technicalCheckDate"
-            className="input input-bordered w-full text-center"
-          />
-        </div>
-        {/* </div> */}
         <div className="mt-5">
           <SubmitBtn editMode={!!vehicle} /* resetForm={resetForm} */ />
         </div>

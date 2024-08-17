@@ -118,7 +118,10 @@ export const vehicleSchema = z.object({
     .optional()
     .default(null), //date
   ChdNo: z.coerce.number().min(1).nullable().optional(),
-  licensePlate: z.string().trim().min(1),
+  licensePlateA: z.coerce.number().min(1),
+  licensePlateB: z.string().trim().min(1),
+  licensePlateC: z.coerce.number().min(1),
+  licensePlateD: z.coerce.number().min(1),
 });
 
 export const connectionSchema = z.object({

@@ -34,7 +34,10 @@ model Vehicle {
   id                 String       @id @default(uuid())
   vehicleName        String // اسم خودرو
   year               Int?
-  licensePlate       String // پلاک
+  licensePlateA      Int // پلاک
+  licensePlateB      String // پلاک
+  licensePlateC      Int // پلاک
+  licensePlateD      Int // پلاک
   insuranceDate      DateTime? // تاریخ بیمه
   insuranceNo        String // شماره بیمه
   technicalCheckDate DateTime? // تاریخ معاینه فنی
