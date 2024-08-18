@@ -3,7 +3,7 @@
 import db from "../db";
 import { revalidatePath } from "next/cache";
 import { vehicleSchema } from "../zodSchemas";
-import { addDays } from "date-fns";
+import { addDays, differenceInDays } from "date-fns";
 
 export async function getVehiclesInsuranceExpSoon() {
   const today = new Date();
@@ -18,7 +18,18 @@ export async function getVehiclesInsuranceExpSoon() {
     },
     orderBy: { insuranceDate: "asc" },
   });
-  return vehicles;
+
+  const vehiclesWithRemainingDays = vehicles.map((vehicle) => {
+    let remainingDays = 0;
+    if (vehicle.insuranceDate) {
+      remainingDays = differenceInDays(vehicle.insuranceDate, today);
+    }
+    return {
+      ...vehicle,
+      remainingDays: remainingDays >= 0 ? remainingDays : 0, // Show 0 if the insurance date has passed
+    };
+  });
+  return vehiclesWithRemainingDays;
 }
 
 export async function getAllVehicles() {
