@@ -3,6 +3,8 @@ import { verifySession } from "@/utils/session";
 import { Bus, Cable, TrafficCone, UserRound } from "lucide-react";
 import Link from "next/link";
 import { Workflow } from "lucide-react";
+import Image from "next/image";
+import icon from "@/app/chadormalu.gif";
 
 const navLinks = [
   { label: "خودروها", href: "/dashboard/vehicles", icon: <Bus /> },
@@ -29,13 +31,18 @@ export default async function DashboardLayout({ children }: { children: React.Re
                   viewBox="0 0 24 24"
                   className="inline-block h-6 w-6 stroke-current"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  ></path>
                 </svg>
               </label>
             </div>
             <div className="mx-2 flex-1 px-2">
-              <Link href="/dashboard" className="flex gap-2">
-                <Workflow /> ایاب و ذهاب
+              <Link href="/dashboard" className="flex items-center gap-2">
+                <Image src={icon} width={50} alt="logo" /> ایاب و ذهاب
               </Link>
               <div className="mr-4">
                 <Avatar user={user} />
