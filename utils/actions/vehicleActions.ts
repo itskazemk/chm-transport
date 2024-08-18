@@ -3,6 +3,23 @@
 import db from "../db";
 import { revalidatePath } from "next/cache";
 import { vehicleSchema } from "../zodSchemas";
+import { addDays } from "date-fns";
+
+export async function getVehiclesInsuranceExpSoon() {
+  const today = new Date();
+  const nearDate = addDays(today, 30);
+
+  const vehicles = await db.vehicle.findMany({
+    where: {
+      insuranceDate: {
+        gte: today, // Greater than or equal to today
+        lte: nearDate, // Less than or equal to 30 days from now
+      },
+    },
+    orderBy: { insuranceDate: "asc" },
+  });
+  return vehicles;
+}
 
 export async function getAllVehicles() {
   let vehicles = await db.vehicle.findMany({ orderBy: { createdAt: "desc" } });
