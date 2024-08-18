@@ -244,7 +244,7 @@ function ConnectionForm({
               data={vehiclesOption.map((vehicle) => {
                 return {
                   value: vehicle.id,
-                  label: `${vehicle.vehicleName}-${vehicle.year}-${vehicle.licensePlate}`,
+                  label: `${vehicle.vehicleName}-${vehicle.year}-${vehicle.licensePlateA}${vehicle.licensePlateB}${vehicle.licensePlateC}${vehicle.licensePlateD}`,
                 };
               })}
             />

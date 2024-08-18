@@ -17,7 +17,10 @@ interface Vehicle {
   id: string;
   vehicleName: string;
   year: number;
-  licensePlate: string;
+  licensePlateA: number;
+  licensePlateB: string;
+  licensePlateC: number;
+  licensePlateD: number;
   insuranceDate?: Date;
   insuranceNo: string;
   technicalCheckDate?: Date;

@@ -71,7 +71,14 @@ function VehicleTable({ vehicles, onEditClick }: VehicleTableProps) {
               <th>{index + 1}</th>
               <td>{vehicle.vehicleName}</td>
               <td>{vehicle.year}</td>
-              <td>{vehicle.licensePlate}</td>
+              <td>
+                <div style={{ direction: "ltr" }}>
+                  <span>{vehicle.licensePlateA}</span>
+                  <span>{vehicle.licensePlateB}</span>
+                  <span>{vehicle.licensePlateC}</span>
+                  <span>{vehicle.licensePlateD}</span>
+                </div>
+              </td>
               <td>{vehicle.insuranceNo}</td>
               {/* تبدیل تاریخ به شمسی */}
               <td>{vehicle.insuranceDate?.toLocaleDateString("fa-ir")}</td>
@@ -79,10 +86,16 @@ function VehicleTable({ vehicles, onEditClick }: VehicleTableProps) {
               {/* تبدیل تاریخ به شمسی */}
               <td>{vehicle.technicalCheckDate?.toLocaleDateString("fa-ir")}</td>
               <td>
-                <Trash2 className="cursor-pointer hover:text-red-500" onClick={() => handleDelete(vehicle.id)} />
+                <Trash2
+                  className="cursor-pointer hover:text-red-500"
+                  onClick={() => handleDelete(vehicle.id)}
+                />
               </td>
               <td>
-                <Pencil className="cursor-pointer hover:text-yellow-600" onClick={() => onEditClick(vehicle)} />
+                <Pencil
+                  className="cursor-pointer hover:text-yellow-600"
+                  onClick={() => onEditClick(vehicle)}
+                />
               </td>
             </tr>
           ))}
