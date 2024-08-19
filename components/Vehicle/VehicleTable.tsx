@@ -49,19 +49,21 @@ function VehicleTable({ vehicles, onEditClick }: VehicleTableProps) {
   //   const [editState, editAction] = useFormState(createDriver, initialState);
 
   return (
-    <div className="overflow-x-auto">
-      <table className="table">
+    <div className="h-[20dvh] overflow-x-auto">
+      <table className="table w-full table-auto">
         {/* head */}
         <thead>
           <tr>
-            <th></th>
-            <th>نوع</th>
-            <th>مدل</th>
-            <th>پلاک</th>
-            <th>شماره بیمه</th>
-            <th>تاریخ بیمه</th>
-            <th>کد خودرو</th>
-            <th>تاریخ معاینه فنی</th>
+            <th className="text-center"></th>
+            <th className="text-center">نوع</th>
+            <th className="text-center">مدل</th>
+            <th className="text-center" colSpan={2}>
+              پلاک
+            </th>
+            <th className="text-center">شماره بیمه</th>
+            <th className="text-center">تاریخ بیمه</th>
+            <th className="text-center">کد خودرو</th>
+            <th className="text-center">تاریخ معاینه فنی</th>
           </tr>
         </thead>
         {/* <tbody>{content}</tbody> */}
@@ -71,12 +73,15 @@ function VehicleTable({ vehicles, onEditClick }: VehicleTableProps) {
               <th>{index + 1}</th>
               <td>{vehicle.vehicleName}</td>
               <td>{vehicle.year}</td>
-              <td>
-                <div style={{ direction: "ltr" }}>
-                  <span>{vehicle.licensePlateA}</span>
-                  <span>{vehicle.licensePlateB}</span>
-                  <span>{vehicle.licensePlateC}</span>
-                  <span>{vehicle.licensePlateD}</span>
+              <td colSpan={2} className="">
+                <div
+                  className="flex justify-between border-2 border-gray-800 p-1"
+                  style={{ direction: "ltr" }}
+                >
+                  <span className="text-center">{vehicle.licensePlateA}</span>
+                  <span className="text-center">{vehicle.licensePlateB}</span>
+                  <span className="text-center">{vehicle.licensePlateC}</span>
+                  <span className="border-l-2 border-red-900 pl-1 text-center">{vehicle.licensePlateD}</span>
                 </div>
               </td>
               <td>{vehicle.insuranceNo}</td>
