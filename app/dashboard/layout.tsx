@@ -22,7 +22,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
           {/* Navbar */}
-          <div className="navbar mx-auto w-3/4 rounded bg-base-300 shadow-md">
+          <div className="navbar rounded bg-base-300 shadow-lg">
             <div className="flex-none lg:hidden">
               <label htmlFor="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost">
                 <svg
@@ -44,11 +44,8 @@ export default async function DashboardLayout({ children }: { children: React.Re
               <Link href="/dashboard" className="flex items-center gap-2">
                 <Image src={icon} width={50} alt="logo" /> ایاب و ذهاب
               </Link>
-              <div className="mr-4">
-                <Avatar user={user} />
-              </div>
             </div>
-            <div className="hidden flex-none lg:block">
+            <div className="hidden flex-none lg:block lg:flex">
               <ul className="menu menu-horizontal">
                 {/* Navbar menu content here */}
                 {navLinks.map((link) => (
@@ -59,6 +56,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
                   </li>
                 ))}
               </ul>
+              <div className="mr-2">
+                <Avatar user={user} />
+              </div>
             </div>
           </div>
           <div className="p-4">{children}</div>

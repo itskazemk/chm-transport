@@ -27,7 +27,11 @@ const SubmitBtn = ({ editMode /* resetForm */ }: any) => {
   const { pending } = useFormStatus();
   return (
     <div className="grid grid-cols-4 gap-2">
-      <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-4`} disabled={pending}>
+      <button
+        type="submit"
+        className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-4`}
+        disabled={pending}
+      >
         {pending ? "..." : editMode ? "ویرایش" : "ثبت مسیر جدید"}
       </button>
       {/* <button type="button" className="btn col-span-1" onClick={resetForm}>
@@ -48,7 +52,10 @@ function RouteForm({ route, onSave, setCurrentRoute }: RouteFormProps) {
     defaultValues: formDefaultValues,
   });
 
-  const [state, formAction] = useFormState(route ? updateRoute.bind(null, route.id) : createRoute, initialState);
+  const [state, formAction] = useFormState(
+    route ? updateRoute.bind(null, route.id) : createRoute,
+    initialState
+  );
   // const [state, formAction] = useFormState(createRoute, initialState);
 
   useEffect(() => {
