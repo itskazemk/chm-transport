@@ -6,6 +6,8 @@ import { Pencil, Trash2 } from "lucide-react";
 import { useEffect } from "react";
 import { useFormState } from "react-dom";
 import toast, { Toaster } from "react-hot-toast";
+import IranLicensePlate from "iran-license-plate";
+import "iran-license-plate/dist/License.css";
 
 // export interface DriverWithEnum {
 //   degree: string;
@@ -49,64 +51,62 @@ function VehicleTable({ vehicles, onEditClick }: VehicleTableProps) {
   //   const [editState, editAction] = useFormState(createDriver, initialState);
 
   return (
-    <div className="h-[20dvh] overflow-x-auto">
-      <table className="table w-full table-auto">
-        {/* head */}
-        <thead>
-          <tr>
-            <th className="text-center"></th>
-            <th className="text-center">نوع</th>
-            <th className="text-center">مدل</th>
-            <th className="text-center" colSpan={2}>
-              پلاک
-            </th>
-            <th className="text-center">شماره بیمه</th>
-            <th className="text-center">تاریخ بیمه</th>
-            <th className="text-center">کد خودرو</th>
-            <th className="text-center">تاریخ معاینه فنی</th>
-          </tr>
-        </thead>
-        {/* <tbody>{content}</tbody> */}
-        <tbody>
-          {vehicles.map((vehicle, index) => (
-            <tr key={vehicle.id}>
-              <th>{index + 1}</th>
-              <td>{vehicle.vehicleName}</td>
-              <td>{vehicle.year}</td>
-              <td colSpan={2} className="">
-                <div
-                  className="flex justify-between border-2 border-gray-800 p-1"
-                  style={{ direction: "ltr" }}
-                >
-                  <span className="text-center">{vehicle.licensePlateA}</span>
-                  <span className="text-center">{vehicle.licensePlateB}</span>
-                  <span className="text-center">{vehicle.licensePlateC}</span>
-                  <span className="border-l-2 border-red-900 pl-1 text-center">{vehicle.licensePlateD}</span>
-                </div>
-              </td>
-              <td>{vehicle.insuranceNo}</td>
-              {/* تبدیل تاریخ به شمسی */}
-              <td>{vehicle.insuranceDate?.toLocaleDateString("fa-ir")}</td>
-              <td>{vehicle.ChdNo}</td>
-              {/* تبدیل تاریخ به شمسی */}
-              <td>{vehicle.technicalCheckDate?.toLocaleDateString("fa-ir")}</td>
-              <td>
-                <Trash2
-                  className="cursor-pointer hover:text-red-500"
-                  onClick={() => handleDelete(vehicle.id)}
-                />
-              </td>
-              <td>
-                <Pencil
-                  className="cursor-pointer hover:text-yellow-600"
-                  onClick={() => onEditClick(vehicle)}
-                />
-              </td>
+    <>
+      <div className="h-[20dvh] overflow-x-auto">
+        <table className="table text-center !leading-none">
+          {/* head */}
+          <thead>
+            <tr>
+              <th></th>
+              <th>نوع</th>
+              <th>مدل</th>
+              <th>پلاک</th>
+              <th>شماره بیمه</th>
+              <th>تاریخ بیمه</th>
+              <th>کد خودرو</th>
+              <th>تاریخ معاینه فنی</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          {/* <tbody>{content}</tbody> */}
+          <tbody>
+            {vehicles.map((vehicle, index) => (
+              <tr key={vehicle.id}>
+                <th>{index + 1}</th>
+                <td>{vehicle.vehicleName}</td>
+                <td>{vehicle.year}</td>
+                <td className="flex justify-center">
+                  <IranLicensePlate
+                    serial="IR15-546d55"
+                    style={{
+                      width: "100px",
+                      fontSize: ".6rem",
+                    }}
+                  />
+                </td>
+                <td>{vehicle.insuranceNo}</td>
+                {/* تبدیل تاریخ به شمسی */}
+                <td>{vehicle.insuranceDate?.toLocaleDateString("fa-ir")}</td>
+                <td>{vehicle.ChdNo}</td>
+                {/* تبدیل تاریخ به شمسی */}
+                <td>{vehicle.technicalCheckDate?.toLocaleDateString("fa-ir")}</td>
+                <td>
+                  <Trash2
+                    className="cursor-pointer hover:text-red-500"
+                    onClick={() => handleDelete(vehicle.id)}
+                  />
+                </td>
+                <td>
+                  <Pencil
+                    className="cursor-pointer hover:text-yellow-600"
+                    onClick={() => onEditClick(vehicle)}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }
 
