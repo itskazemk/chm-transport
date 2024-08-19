@@ -16,11 +16,12 @@ export async function signUpAction(state: any, data: FormData) {
   }
 
   // 2. Create user
-  const { name, userName, role, password } = validationResult.data;
+  const { name, username, role, password } = validationResult.data;
+  console.log(33, name, username, role, password);
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const user = await db.user.create({ data: { name, userName, role, password: hashedPassword } });
+  const user = await db.user.create({ data: { name, username, role, password: hashedPassword } });
 
   // 3. Create session
   await createSession(user);
@@ -40,7 +41,7 @@ export async function SignInAction(state: any, data: FormData) {
 
   // 2. Get User Data
   const { username, password } = validationResult.data;
-  const user = await db.user.findFirst({ where: { userName: username } });
+  const user = await db.user.findFirst({ where: { username: username } });
 
   // If user is not found, return early
   if (!user) {

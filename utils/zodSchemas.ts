@@ -138,7 +138,7 @@ export const connectionSchema = z.object({
 
 export const SignupFormSchema = z.object({
   name: z.string().trim().min(3),
-  userName: z.string().trim().min(3),
+  username: z.string().trim().min(3),
   role: z.coerce.number(),
   password: z.string().trim().min(3),
 });

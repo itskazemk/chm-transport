@@ -30,7 +30,7 @@ export async function createSession(user: User) {
   // add name, username, role
   const session = await encrypt({
     userId: user.id,
-    username: user.userName,
+    username: user.username,
     name: user.name,
     role: user.role,
     expiresAt,

@@ -75,7 +75,7 @@ model Connection {
 model User {
   id        String     @id @default(uuid())
   name      String
-  userName  String     @unique
+  username  String     @unique
   password  String
   role      Int
   Sessions  Sessions[]
