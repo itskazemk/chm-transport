@@ -8,6 +8,8 @@ import { useFormState } from "react-dom";
 import toast, { Toaster } from "react-hot-toast";
 import IranLicensePlate from "iran-license-plate";
 import "iran-license-plate/dist/License.css";
+import { convertLicensePlate } from "@/utils";
+// import convertLicensePlate from '@/utils/index';
 
 // export interface DriverWithEnum {
 //   degree: string;
@@ -76,7 +78,13 @@ function VehicleTable({ vehicles, onEditClick }: VehicleTableProps) {
                 <td>{vehicle.year}</td>
                 <td className="flex justify-center">
                   <IranLicensePlate
-                    serial="IR15-546d55"
+                    // serial="IR15-546d55"
+                    serial={convertLicensePlate({
+                      licensePlateA: vehicle.licensePlateA,
+                      licensePlateB: vehicle.licensePlateB,
+                      licensePlateC: vehicle.licensePlateC,
+                      licensePlateD: vehicle.licensePlateD,
+                    })}
                     style={{
                       width: "100px",
                       fontSize: ".6rem",
