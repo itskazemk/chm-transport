@@ -37,6 +37,38 @@ export async function getVehiclesInsuranceExpSoon() {
   return vehiclesWithRemainingDays;
 }
 
+export async function getVehiclesTechExpSoon() {
+  const today = new Date();
+  const nearDate = addDays(today, 30);
+
+  const vehicles = await db.vehicle.findMany({
+    where: {
+      technicalCheckDate: {
+        gte: today, // Greater than or equal to today
+        lte: nearDate, // Less than or equal to 30 days from now
+      },
+    },
+    orderBy: { technicalCheckDate: "asc" },
+  });
+
+  const vehiclesWithRemainingDays = vehicles.map((vehicle) => {
+    let remainingDays = 0;
+    let statusColor = "blue";
+    if (vehicle.technicalCheckDate) {
+      remainingDays = differenceInDays(vehicle.technicalCheckDate, today);
+      if (remainingDays < 10) {
+        statusColor = "red";
+      }
+    }
+    return {
+      ...vehicle,
+      remainingDays: remainingDays >= 0 ? remainingDays : 0, // Show 0 if the insurance date has passed
+      statusColor,
+    };
+  });
+  return vehiclesWithRemainingDays;
+}
+
 export async function getAllVehicles() {
   let vehicles = await db.vehicle.findMany({ orderBy: { createdAt: "desc" } });
   return vehicles;
