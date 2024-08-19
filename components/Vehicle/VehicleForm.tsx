@@ -26,7 +26,11 @@ const SubmitBtn = ({ editMode /* resetForm */ }: any) => {
   const { pending } = useFormStatus();
   return (
     <div className="grid grid-cols-4 gap-2">
-      <button type="submit" className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-4`} disabled={pending}>
+      <button
+        type="submit"
+        className={`btn ${editMode ? "btn-warning" : "btn-primary"} col-span-4`}
+        disabled={pending}
+      >
         {pending ? "..." : editMode ? "ویرایش" : "ثبت خودرو جدید"}
       </button>
       {/* <button type="button" className="btn col-span-1" onClick={resetForm}>
@@ -101,7 +105,7 @@ function VehicleForm({ vehicle, onSave, setCurrentVehicle }: VehicleFormProps) {
 
   return (
     <>
-      {state?.message && <div>{state.message}</div>}
+      {/* {state?.message && <div>{state.message}</div>} */}
       <div className="mb-2 flex gap-2 rounded bg-base-200 p-3">
         <SquarePlus className="text-primary" />
         ثبت خودرو جدید
@@ -155,8 +159,10 @@ function VehicleForm({ vehicle, onSave, setCurrentVehicle }: VehicleFormProps) {
           </div>
           <div className="grid w-full grid-cols-6 gap-2" style={{ direction: "ltr" }}>
             <input
-              type="number"
-              {...form.register("licensePlateA")}
+              type="text"
+              {...form.register("licensePlateA", {})}
+              maxLength={2}
+              minLength={2}
               placeholder="23"
               // name="path"
               className="input input-bordered col-span-1 max-w-xs"
@@ -164,20 +170,26 @@ function VehicleForm({ vehicle, onSave, setCurrentVehicle }: VehicleFormProps) {
             <input
               type="text"
               {...form.register("licensePlateB")}
+              maxLength={1}
+              minLength={1}
               placeholder="ب"
               // name="path"
               className="input input-bordered col-span-1 max-w-xs"
             />
             <input
-              type="number"
+              type="text"
               {...form.register("licensePlateC")}
+              maxLength={3}
+              minLength={3}
               placeholder="273"
               // name="path"
               className="input input-bordered col-span-3 max-w-xs"
             />
             <input
-              type="number"
+              type="text"
               {...form.register("licensePlateD")}
+              maxLength={2}
+              minLength={2}
               placeholder="64"
               // name="path"
               className="input input-bordered col-span-1 max-w-xs"

@@ -5,10 +5,9 @@ import { Vehicle } from "@prisma/client";
 import { Pencil, Trash2 } from "lucide-react";
 import { useEffect } from "react";
 import { useFormState } from "react-dom";
-import toast, { Toaster } from "react-hot-toast";
-import IranLicensePlate from "iran-license-plate";
-import "iran-license-plate/dist/License.css";
-import { convertLicensePlate } from "@/utils";
+import toast from "react-hot-toast";
+import LicensePlate from "@/components/LicensePlate";
+
 // import convertLicensePlate from '@/utils/index';
 
 // export interface DriverWithEnum {
@@ -54,7 +53,7 @@ function VehicleTable({ vehicles, onEditClick }: VehicleTableProps) {
 
   return (
     <>
-      <div className="h-[20dvh] overflow-x-auto">
+      <div className="overflow-x-auto">
         <table className="table text-center !leading-none">
           {/* head */}
           <thead>
@@ -77,19 +76,7 @@ function VehicleTable({ vehicles, onEditClick }: VehicleTableProps) {
                 <td>{vehicle.vehicleName}</td>
                 <td>{vehicle.year}</td>
                 <td className="flex justify-center">
-                  <IranLicensePlate
-                    // serial="IR15-546d55"
-                    serial={convertLicensePlate({
-                      licensePlateA: vehicle.licensePlateA,
-                      licensePlateB: vehicle.licensePlateB,
-                      licensePlateC: vehicle.licensePlateC,
-                      licensePlateD: vehicle.licensePlateD,
-                    })}
-                    style={{
-                      width: "100px",
-                      fontSize: ".6rem",
-                    }}
-                  />
+                  <LicensePlate vehicle={vehicle} />
                 </td>
                 <td>{vehicle.insuranceNo}</td>
                 {/* تبدیل تاریخ به شمسی */}

@@ -21,12 +21,17 @@ export async function getVehiclesInsuranceExpSoon() {
 
   const vehiclesWithRemainingDays = vehicles.map((vehicle) => {
     let remainingDays = 0;
+    let statusColor = "blue";
     if (vehicle.insuranceDate) {
       remainingDays = differenceInDays(vehicle.insuranceDate, today);
+      if (remainingDays < 10) {
+        statusColor = "red";
+      }
     }
     return {
       ...vehicle,
       remainingDays: remainingDays >= 0 ? remainingDays : 0, // Show 0 if the insurance date has passed
+      statusColor,
     };
   });
   return vehiclesWithRemainingDays;
