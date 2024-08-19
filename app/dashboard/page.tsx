@@ -7,7 +7,7 @@ async function Dashboard() {
   const TechVehicles = await getVehiclesTechExpSoon();
 
   return (
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
       <div className="rounded-xl border border-gray-300 bg-gradient-to-r from-gray-50 to-white p-6 shadow-lg sm:p-8">
         <h3 className="text-xl font-bold text-gray-700">معاینه فنی های نزدیک</h3>
 
@@ -28,6 +28,8 @@ async function Dashboard() {
                 </div>
               </div>
               <RingProgress
+                // size={100}
+                // thickness={3}
                 className="col-span-1 flex items-center justify-center"
                 sections={[{ value: ((30 - item.remainingDays) / 30) * 100, color: item.statusColor }]}
                 label={
