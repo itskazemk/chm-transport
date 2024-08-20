@@ -29,6 +29,7 @@
     "react-hot-toast": "^2.4.1",
     "react-multi-date-picker": "^4.5.2",
     "server-only": "^0.0.1",
+    "sharp": "^0.33.5",
     "zod": "^3.23.8"
   },
   "devDependencies": {
