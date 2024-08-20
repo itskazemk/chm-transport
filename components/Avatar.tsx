@@ -3,7 +3,6 @@
 import { deleteSession } from "@/utils/session";
 import { UserRoleTypeEnum } from "@/utils/zodSchemas";
 import { Group, Menu, Avatar as MantineAvatar } from "@mantine/core";
-import { icon } from "@/app/user.png";
 function Avatar({ user }: any) {
   const { username, role } = user;
 
@@ -23,7 +22,7 @@ function Avatar({ user }: any) {
     <Menu shadow="md" width={200}>
       <Menu.Target>
         <Group className="cursor-pointer rounded bg-base-200 px-2 py-1 hover:bg-base-100">
-          <MantineAvatar src={icon} radius="xl" />
+          <MantineAvatar src={"@/app/user.png"} radius="xl" />
           <div style={{ flex: 1 }}>
             <div>{username}</div>
             <div className="text-sm font-light">{roleName}</div>

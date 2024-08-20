@@ -34,7 +34,7 @@ export function SignInForm() {
                 stroke="currentColor"
                 stroke-width="2"
                 stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinejoin="round"
                 className="lucide lucide-mail"
               >
                 <rect width="20" height="16" x="2" y="4" rx="2"></rect>
@@ -67,7 +67,7 @@ export function SignInForm() {
                 stroke="currentColor"
                 stroke-width="2"
                 stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinejoin="round"
                 className="lucide lucide-square-asterisk"
               >
                 <rect width="18" height="18" x="3" y="3" rx="2"></rect>
