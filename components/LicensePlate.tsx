@@ -1,7 +1,6 @@
 import { convertLicensePlate } from "@/utils";
 import IranLicensePlate from "iran-license-plate";
 
-// import "@/app/license.css";
 
 function LicensePlate({ vehicle }: any) {
   return (

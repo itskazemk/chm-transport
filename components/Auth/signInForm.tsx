@@ -1,5 +1,5 @@
 "use client";
-import icon from "@/app/chadormalu.gif";
+import icon from "@/public/chadormalu.gif";
 
 import { SignInAction } from "@/utils/actions/authActions";
 import Image from "next/image";

@@ -5,7 +5,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { SelectOption } from "../SimpleInputs";
 import { Select } from "@mantine/core";
 import Image from "next/image";
-import icon from "@/app/chadormalu.gif";
+import icon from "@/public/chadormalu.gif";
 // import { useFormState, useFormStatus } from "react-dom";
 
 export function SignUpForm() {

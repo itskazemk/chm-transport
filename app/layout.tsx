@@ -1,7 +1,8 @@
 // order does matter!
 import type { Metadata } from "next";
 import Link from "next/link";
-import "iran-license-plate/dist/License.css";
+// import "iran-license-plate/dist/License.css";
+import "@/app/license.css";
 import "./globals.css";
 // import Footer from "@/components/Footer";
 import localFont from "next/font/local";

@@ -4,7 +4,7 @@ import { Bus, Cable, TrafficCone, UserRound } from "lucide-react";
 import Link from "next/link";
 import { Workflow } from "lucide-react";
 import Image from "next/image";
-import icon from "@/app/chadormalu.gif";
+import icon from "@/public/chadormalu.gif";
 
 const navLinks = [
   { label: "خودروها", href: "/dashboard/vehicles", icon: <Bus /> },

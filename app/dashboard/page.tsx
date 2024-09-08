@@ -24,7 +24,7 @@ async function Dashboard() {
                 </div>
                 <div className="text-sm text-gray-500">کد: {item.ChdNo}</div>
                 <div className="text-sm text-gray-500">
-                  تاریخ بیمه: {item.insuranceDate?.toLocaleDateString("fa-ir")}
+                  تاریخ معاینه فنی: {item.technicalCheckDate?.toLocaleDateString("fa-ir")}
                 </div>
               </div>
               <RingProgress
