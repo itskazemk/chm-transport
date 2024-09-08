@@ -66,14 +66,14 @@ export enum CompanyEnum {
 
 export enum ShiftTypeEnum {
   "انتخاب نشده" = 1,
-  "روزکار" = 2,
-  "شیفت" = 3,
+  "روزکار",
+  "شیفت",
 }
 
 export enum UserRoleTypeEnum {
-  admin = 1,
-  type2 = 2,
-  type3 = 3,
+  superAdmin = 1,
+  admin,
+  supervisor,
 }
 
 export const driverSchema = z.object({

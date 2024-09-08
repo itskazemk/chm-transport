@@ -34,8 +34,8 @@ export function SignUpForm() {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
                 strokeLinejoin="round"
                 className="lucide lucide-mail"
               >
@@ -68,8 +68,8 @@ export function SignUpForm() {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
                 strokeLinejoin="round"
                 className="lucide lucide-mail"
               >
@@ -102,8 +102,8 @@ export function SignUpForm() {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
                 strokeLinejoin="round"
                 className="lucide lucide-mail"
               >
@@ -116,8 +116,8 @@ export function SignUpForm() {
               name="role"
               data={[
                 { value: "1", label: "Super Admin" },
-                { value: "2", label: "user 2" },
-                { value: "#", label: "user 3" },
+                { value: "2", label: "Admin" },
+                { value: "3", label: "Supervisor" },
               ]}
             />
           </div>
@@ -136,8 +136,8 @@ export function SignUpForm() {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
                 strokeLinejoin="round"
                 className="lucide lucide-square-asterisk"
               >
