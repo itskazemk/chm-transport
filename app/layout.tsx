@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "iran-license-plate/dist/License.css";
 import "./globals.css";
-import Footer from "@/components/Footer";
+// import Footer from "@/components/Footer";
 import localFont from "next/font/local";
 import "@mantine/core/styles.css";
 import { ColorSchemeScript } from "@mantine/core";
@@ -33,7 +33,7 @@ export default function RootLayout({
         <Providers>
           <main className="flex h-screen flex-col">
             <div className="flex-1">{children}</div>
-            <Footer />
+            {/* <Footer /> */}
           </main>
         </Providers>
       </body>
