@@ -42,37 +42,37 @@ type PersianLetterType =
 
 // Mapping of licensePlateB values to Persian letters in lowercase
 const persianLetters: Record<string, string> = {
-  ا: "a",
+  الف: "f",
   ب: "b",
-  پ: "p",
-  ت: "t",
-  ث: "s",
+  پ: "P",
+  ت: "T",
+  ث: "C",
   ج: "j",
-  چ: "c",
-  ح: "h",
-  خ: "x",
+  چ: "c", // Wrong Not Exist
+  ح: "h", // Wrong Not Exist
+  خ: "x", // Wrong Not Exist
   د: "d",
-  ذ: "z",
-  ر: "r",
-  ز: "z",
+  ذ: "z", // Wrong Not Exist
+  ر: "r", // Wrong Not Exist
+  ز: "Z",
   س: "s",
-  ش: "sh",
-  ص: "s",
-  ض: "z",
+  ش: "M",
+  ص: "s", // Wrong Not Exist
+  ض: "z", // Wrong Not Exist
   ط: "t",
-  ظ: "z",
-  ع: "a",
-  غ: "g",
-  ف: "f",
-  ق: "g",
-  ک: "k",
-  گ: "g",
+  ظ: "z", // Wrong Not Exist
+  ع: "A",
+  غ: "g", // Wrong Not Exist
+  ف: "F",
+  ق: "g", // Wrong 
+  ک: "K",
+  گ: "G",
   ل: "l",
   م: "m",
   ن: "n",
   و: "v",
   ه: "h",
-  ی: "y",
+  ی: "y", // Wrong
 };
 
 export function convertLicensePlate({
@@ -82,5 +82,7 @@ export function convertLicensePlate({
   licensePlateD,
 }: LicensePlateType) {
   const persianLetter = persianLetters[licensePlateB];
+  console.log(licensePlateA, licensePlateB, licensePlateC, licensePlateD);
+  console.log(persianLetter);
   return `IR${licensePlateD}-${licensePlateC}${persianLetter}${licensePlateA}`;
 }
