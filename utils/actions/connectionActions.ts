@@ -26,6 +26,23 @@ export async function createConnection(prevState: any, data: FormData) {
   console.log("posted data, ZOD's safeParseZ", parsed);
 
   try {
+    // هر راننده فقط یکبار میتواند استفاده شود
+    const primaryDriver = await db.connection.findMany({
+      where: { primaryDriverId: parsed.data.primaryDriverId },
+    });
+
+    if (primaryDriver.length > 0) {
+      return { message: "error", result: "راننده اصلی قبلا استفاده شده است" };
+    }
+
+    const secondaryDriver = await db.connection.findMany({
+      where: { secondaryDriverId: parsed.data.secondaryDriverId },
+    });
+
+    if (secondaryDriver.length > 0) {
+      return { message: "error", result: "راننده جایگزین قبلا استفاده شده است" };
+    }
+
     const result = await db.connection.create({ data: parsed.data });
     revalidatePath("/connections", "layout");
     return { message: "create success", result };

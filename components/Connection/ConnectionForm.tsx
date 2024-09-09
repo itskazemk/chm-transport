@@ -76,13 +76,14 @@ function ConnectionForm({
   );
 
   useEffect(() => {
-    console.log(111, state.message);
+    console.log(111, state.result);
     if (state.message == "update success") {
       console.log("edit effect", state.result);
       onSave(state.result);
       toast.success("با موفقیت ویرایش شد!");
     } else if (state.message == "error") {
-      toast.error("خطا");
+      // toast.error("خطا");
+      toast.error(state?.result ?? "خطا");
     } else if (state.message == "create success") {
       toast.success("با موفقیت ثبت شد!");
     }
